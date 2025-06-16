@@ -330,12 +330,16 @@ tmux_conf_theme_clock_style="24"
 #   - disabled
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel or xclip
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
-set -g default-shell $HOME/.xxh/.xxh/shells/xxh-shell-fish/build/entrypoint.sh
+
+setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+set -g update-environment -r
+
+set -g default-shell $HOME/.local/bin/fish
 
 # increase history size
 #set -g history-limit 10000
@@ -360,6 +364,9 @@ set -g mode-keys vi
 
 # move status line to top
 set -g status-position top
+
+set -s set-clipboard on
+set -g allow-passthrough
 
 
 # -- tpm -----------------------------------------------------------------------
