@@ -18,3 +18,4 @@ home/.local/bin/uvx filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/ya filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/ filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/fd filter=lfs diff=lfs merge=lfs -text
+home/.local/bin/eza filter=lfs diff=lfs merge=lfs -text
