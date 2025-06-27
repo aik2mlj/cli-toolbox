@@ -118,6 +118,8 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# eval /home/aik2/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# eval ~/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 alias conda "conda-init; conda"
+
+set -gx DEEPSEEK_API_KEY (cat ~/.deepseek_api_key)
