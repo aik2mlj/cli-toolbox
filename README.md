@@ -15,7 +15,9 @@ Notice that the configuration requires a patched font to display icons correctly
 
 ## Binary tools included
 
-The binary tools in this repository are compiled for the x86_64 architecture and are intended for use on remote Linux servers. They are located under `/home/.local/bin/` (in case you are using a shell other than `fish`, you need to [add it to your path](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). For `fish` users this is already configured.) Notice that you need to have `git-lfs` installed to pull the binaries. Here is a brief overview:
+The binary tools in this repository are compiled for the x86_64 architecture and are intended for use on remote Linux servers. They are located under `/home/.local/bin/` (in case you are using a shell other than `fish`, you need to [add it to your path](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). For `fish` users this is already configured.) Notice that you need to have `git-lfs` installed to pull the binaries.
+
+Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
 
 - [fish](https://fishshell.com/) - A smart and user-friendly command line shell. Smarter tabs, autocompletion and syntax highlighting built-in.
 - [btop](https://github.com/aristocratos/btop) - A cool monitoring tool for system resources. `htop` alternative.
@@ -45,7 +47,7 @@ The binary tools in this repository are compiled for the x86_64 architecture and
 - `fish` - I use `fish` as my shell. The configuration includes some useful functions, abbreviations and aliases. Please see the main configuration file at [`~/.config/fish/config.fish`](home/.config/fish/config.fish) for details. Some things to note:
     - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory.
     - The default prompt is set to use `starship`, which provides a nice and informative prompt.
-    - The default editor is set to `neovim`. `vim` will be `nvim`. You can comment out the line if you don't want this behavior.
+    - The default editor is set to `neovim`. `vim` will become `nvim`. You can comment out the line if you don't want this behavior.
     - ctrl + r to search through your command history with `fzf`.
     - ctrl + f to search through your files under the current directory with `fzf`.
     - ctrl + o to open the file manager `yazi` and will change the current working directory when exiting (see the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper)).
