@@ -7,6 +7,10 @@ Hi there, this repository contains configurations and scripts that I use to set 
 Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `starship`, and `yazi`.
 
 ```shell
+# clone the repository to your remote machine
+git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-server-configs
+
+# installation
 ./install.sh  # the necessary configurations with backup.
 ./install.sh --overwrite  # necessary confiurations without backup existing configuration files.
 ./install.sh --all  # all configurations, for my personal use.
