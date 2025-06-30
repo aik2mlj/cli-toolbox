@@ -1,27 +1,27 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "c648526"
+rev = "2ad42fa"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "c648526"
-hash = "a7ab702e1ef0c097defbc976ed34c186"
+rev = "2ad42fa"
+hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "c648526"
-hash = "bf6f074cd41ee33c3360341d168f9733"
+rev = "2ad42fa"
+hash = "e01006bfb38951ea89031bd918b20dbb"
 
 [[plugin.deps]]
-use = "AnirudhG07/rich-preview"
-rev = "843c3fa"
-hash = "b4040931f0d2f9670ddb4923e55cd881"
+use = "raikhan/compress"
+rev = "0e21310"
+hash = "64eb7a1b835cf57bbda62b4bf4c80fe0"
 
 [[plugin.deps]]
-use = "KKV9/compress"
-rev = "9fc8fe0"
-hash = "2ad086899bf368fba211a33d8f68c39d"
+use = "yazi-rs/plugins:piper"
+rev = "2ad42fa"
+hash = "2143a53182dbbe935a1abd1623424aa5"
 
 [flavor]
 deps = []

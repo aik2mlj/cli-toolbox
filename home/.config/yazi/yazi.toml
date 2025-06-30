@@ -6,22 +6,30 @@ linemode = "size"
 wrap = "yes"
 
 [[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
+id = "no-remote"
+name = "/mnt/remote/**"
+run = "noop"
 
 [[plugin.prepend_fetchers]]
-id   = "git"
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
 name = "*/"
-run  = "git"
+run = "git"
 
 [plugin]
 prepend_previewers = [
-    { name = "*.csv", run = "rich-preview"}, # for csv files
-    { name = "*.md", run = "rich-preview" }, # for markdown (.md) files
-    { name = "*.rst", run = "rich-preview"}, # for restructured text (.rst) files
-    { name = "*.ipynb", run = "rich-preview"}, # for jupyter notebooks (.ipynb)
-    # { name = "*.json", run = "rich-preview"}, # for json (.json) files
-    # { name = "*.lang_type", run = "rich-preview"} # for particular language files eg. .py, .go., .lua, etc.
-    { name = "*.html", run = "html-preview" },
+    # { name = "/mnt/remote/**", run = "noop" },
+    { name = "*.csv", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' },   # for csv files
+    { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },    # for markdown (.md) files
+    { name = "*.rst", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' },   # for restructured text (.rst) files
+    { name = "*.ipynb", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' }, # for jupyter notebooks (.ipynb)
+    { name = "*.html", run = 'piper -- (command -v cha >/dev/null 2>&1 && cha -d "$1") || w3m -dump "$1"' },
 ]
+
+[[plugin.prepend_preloaders]]
+name = "/mnt/remote/**"
+run = "noop"
