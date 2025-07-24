@@ -29,7 +29,6 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [btop](https://github.com/aristocratos/btop) - A cool monitoring tool for system resources. `htop` alternative.
 - [difftastic](https://difftastic.wilfred.me.uk/): A structural diff tool that understands syntax.
     - It provides a more intuitive and readable diff output compared to `diff` or `git diff`, especially for code changes.
-    - Notice that I include only the compressed tarball to minimize the size, but the installation script will automatically extract it for you.
 - [dust](https://github.com/bootandy/dust) - A more intuitive version of `du` in rust, handy to inspect disk usage.
 - [eza](https://github.com/eza-community/eza) - A modern alternative to `ls` with colors and icons.
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to `find`.
