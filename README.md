@@ -87,6 +87,8 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - [Lazydocker](https://github.com/jesseduffield/lazydocker): Similar to `lazygit`, but for Docker. It provides a terminal UI for managing Docker containers, images, and volumes.
 
-- My choice of terminal emulator? [Kitty](https://sw.kovidgoyal.net/kitty/) or [iTerm2](https://iterm2.com/).
+- [nvtop](https://github.com/Syllo/nvtop) or [nvitop](https://github.com/XuehaiPan/nvitop) for GPU monitoring: If you are working with GPUs, these tools provide a nice terminal UI to monitor GPU usage, memory, and processes.
+
+- My choice of terminal emulator? [Kitty](https://sw.kovidgoyal.net/kitty/), [WezTerm](https://wezterm.org/), or [iTerm2](https://iterm2.com/).
 
 - Wanna manage your configuration files gracefully? Check out [dotfiles](https://dotfiles.github.io/) for tutorials and tools. My choice is [chezmoi](https://www.chezmoi.io/).
