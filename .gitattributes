@@ -20,3 +20,4 @@ home/.local/bin/ filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/fd filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/eza filter=lfs diff=lfs merge=lfs -text
 home/.local/bin/rg filter=lfs diff=lfs merge=lfs -text
+home/.local/bin/difft-x86_64-unknown-linux-musl.tar.gz filter=lfs diff=lfs merge=lfs -text

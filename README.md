@@ -4,7 +4,7 @@ Hi there, this repository contains configurations and scripts that I use to set 
 
 ## Installation
 
-Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `starship`, and `yazi`.
+Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `starship`, `yazi`, and `lazygit`.
 
 ```shell
 # clone the repository to your remote machine
@@ -27,6 +27,9 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [fish](https://fishshell.com/) - A smart and user-friendly command line shell. Smarter tabs, autocompletion and syntax highlighting built-in.
     - Recommended reading: The fish shell [tutorial](https://fishshell.com/docs/current/tutorial.html) and [interactive guide](https://fishshell.com/docs/current/interactive.html).
 - [btop](https://github.com/aristocratos/btop) - A cool monitoring tool for system resources. `htop` alternative.
+- [difftastic](https://difftastic.wilfred.me.uk/): A structural diff tool that understands syntax.
+    - It provides a more intuitive and readable diff output compared to `diff` or `git diff`, especially for code changes.
+    - Notice that I include only the compressed tarball to minimize the size, but the installation script will automatically extract it for you.
 - [dust](https://github.com/bootandy/dust) - A more intuitive version of `du` in rust, handy to inspect disk usage.
 - [eza](https://github.com/eza-community/eza) - A modern alternative to `ls` with colors and icons.
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to `find`.
@@ -72,6 +75,8 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
     - [full-border.yazi](https://github.com/yazi-rs/plugins/tree/main/full-border.yazi) to make it look fancier.
     - [git.yazi](https://github.com/yazi-rs/plugins/tree/main/git.yazi) to show the status of git file changes in the file list.
     - [compress.yazi](https://github.com/KKV9/compress.yazi) to compress selected files to an archive (shortcut: `ca`).
+
+- `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
 
 
 ## Optional

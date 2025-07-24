@@ -16,6 +16,7 @@ ESSENTIAL_CONFIGS=(
     ".config/fish"
     ".config/starship.toml"
     ".config/yazi"
+    ".config/lazygit"
     ".ssh/rc"
 )
 
@@ -42,7 +43,13 @@ install_bin_tools() {
     if [ -d "$SOURCE_HOME/.local/bin" ]; then
         for bin in "$SOURCE_HOME/.local/bin/"*; do
             echo "Copying $(basename "$bin") to $LOCAL_BIN_DIR"
-            cp "$bin" "$LOCAL_BIN_DIR/" || true
+            # if bin is a tarball, extract it
+            if [[ "$bin" == *.tar.gz || "$bin" == *.tar.bz2 || "$bin" == *.tar.xz ]]; then
+                echo "Extracting $bin"
+                tar -xf "$bin" -C "$LOCAL_BIN_DIR"
+            else
+                cp "$bin" "$LOCAL_BIN_DIR/" || true
+            fi
         done
     fi
 }
