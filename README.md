@@ -4,7 +4,7 @@ Hi there, this repository contains configurations and scripts that I use to set 
 
 ## Installation
 
-Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `starship`, `yazi`, and `lazygit`.
+Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `yazi`, and `lazygit`.
 
 ```shell
 # clone the repository to your remote machine
@@ -64,8 +64,6 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
     - `ctrl + o` to open the file manager `yazi` and will change the current working directory when exiting (the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper) is configured in [`functions/yazi-cd.fish`](home/.config/fish/functions/yazi-cd.fish)).
     - `ls`, `ll`, etc. are mapped to `eza` that shows colors and icons.
     - To make the shell loading faster, `conda init` is lazy-loaded only after you run `conda` command for the first time.
-
-- `starship` - Just some customizations to the prompt. The configuration file is located at [`~/.config/starship.toml`](home/.config/starship.toml). You can delete it if you want the default prompt, or modify it according to your liking.
 
 - `yazi` - The configuration files are located at [`~/.config/yazi/`](home/.config/yazi/). I basically installed some plugins to enhance the functionality and the look.
     - `shift + j/k` to navigate 5 times faster in the file list. `opt/alt + j/k` to seek 5 units up/down in the preview (e.g., see the next page of the previewed text file, or see the next frame of the previewed video).

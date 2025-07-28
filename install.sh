@@ -14,7 +14,7 @@ ESSENTIAL_CONFIGS=(
     ".tmux.conf"
     ".tmux.conf.local"
     ".config/fish"
-    ".config/starship.toml"
+    # ".config/starship.toml"
     ".config/yazi"
     ".config/lazygit"
     ".ssh/rc"
