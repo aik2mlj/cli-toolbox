@@ -131,7 +131,7 @@ install_bin_tools() {
     run_gah Wilfred/difftastic       # installs difft
     run_gah bootandy/dust
     run_gah eza-community/eza
-    run_gah charmbracelet/glow
+    run_gah Skardyy/mcat
     run_gah BurntSushi/ripgrep       # installs rg
     run_gah starship/starship
     run_gah astral-sh/uv             # also installs uvx
