@@ -4,7 +4,9 @@ Hi there, this repository contains configurations and scripts that I use to set 
 
 ## Installation
 
-Please take a look at the [install.sh](./install.sh) script to see what it does. By default, it will copy all the binary tools to `~/.local/bin/`, backup the configurations files if you already have them, and copy the configuration files for `tmux`, `fish`, `yazi`, and `lazygit`.
+Use the [install.sh](./install.sh) script to manage the installation. By default, it will install all the binary tools to `~/.local/bin/`, backup the config files if you already have them, and copy the essential configs (for `tmux`, `fish`, `yazi`, and `lazygit`).
+
+In case you are using a shell other than `fish`, you need to [add `~/.local/bin` to your PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). For `fish` users this is already configured.
 
 ```shell
 # clone the repository to your remote machine
@@ -16,16 +18,15 @@ git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-serv
 ./install.sh --all                # install binaries + all configs (for personal use)
 
 # upgrade all binary tools to their latest releases
+# you can also run this to only install binaries without configs
 ./install.sh --upgrade
 ```
 
-Notice that the configuration requires a patched font to display icons correctly. You can install one of the [nerd fonts](https://www.nerdfonts.com/) **locally** as you like and configure your terminal emulator to use it in the settings.
+Notice that some of the tools requires a patched font to display icons correctly. You can install one of the [nerd fonts](https://www.nerdfonts.com/) **locally** as you like and configure your terminal emulator to use it in the settings.
 
 ## Binary tools included
 
-The binary tools are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored in `tools/gah`). This requires an internet connection during `./install.sh` but keeps the repository lightweight — no `git-lfs` needed. Binaries are installed to `~/.local/bin/` without root. If the server has outbound internet access but limited GitHub API rate limits, set `GITHUB_PAT=<your_token>` before running the script.
-
-The tools support **x86_64** and **arm64** Linux. In case you are using a shell other than `fish`, you need to [add `~/.local/bin` to your PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). For `fish` users this is already configured.
+The binary tools are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored and modified in [`tools/gah`](tools/gah). It will automatically detect your system architecture and download the appropriate binaries.
 
 Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
 
