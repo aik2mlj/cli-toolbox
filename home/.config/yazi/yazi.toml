@@ -6,30 +6,34 @@ linemode = "size"
 wrap = "yes"
 
 [[plugin.prepend_fetchers]]
-id = "no-remote"
-name = "/mnt/remote/**"
-run = "noop"
-
-[[plugin.prepend_fetchers]]
 id = "git"
-name = "*"
+url = "*"
 run = "git"
 
 [[plugin.prepend_fetchers]]
 id = "git"
-name = "*/"
+url = "*/"
 run = "git"
 
 [plugin]
 prepend_previewers = [
-    # { name = "/mnt/remote/**", run = "noop" },
-    { name = "*.csv", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' },   # for csv files
-    { name = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },    # for markdown (.md) files
-    { name = "*.rst", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' },   # for restructured text (.rst) files
-    { name = "*.ipynb", run = 'piper -- rich -j --left --panel=rounded --guides --line-numbers --force-terminal "$1"' }, # for jupyter notebooks (.ipynb)
-    { name = "*.html", run = 'piper -- (command -v cha >/dev/null 2>&1 && cha -d "$1") || w3m -dump "$1"' },
-]
+    # mcat is faster and prettier than glow. need to strip the stdin header and OSC 8 hyperlink escape sequences
+    { url = "*.md", run = 'piper -- mcat -P -c -f --opts "scale=0.49" --theme=kanagawa "$1" | tail -n +9 | perl -pe "s/\e\]8;[^;]*;[^\e]*\e\\\\//g"' },
+    # chawan or w3m for html rendering
+    { url = "*.html", run = 'piper -- (command -v cha >/dev/null 2>&1 && cha -d "$1") || w3m -dump "$1"' },
 
-[[plugin.prepend_preloaders]]
-name = "/mnt/remote/**"
-run = "noop"
+    # mediainfo
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo"},
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator, Adobe Photoshop is image/adobe.photoshop, already handled above
+    { mime = "application/postscript", run = "mediainfo" },
+]
+prepend_preloaders = [
+    # mediainfo
+    # Replace magick, image, video with mediainfo
+    { mime = "{audio,video,image}/*", run = "mediainfo" },
+    { mime = "application/subrip", run = "mediainfo" },
+    # Adobe Illustrator, Adobe Photoshop is image/adobe.photoshop, already handled above
+    { mime = "application/postscript", run = "mediainfo" },
+]
