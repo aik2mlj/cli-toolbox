@@ -114,6 +114,19 @@ install_nvim() {
     echo "Installed: nvim (AppImage)"
 }
 
+# MediaInfo: AppImage for maximum glibc compatibility (bundles glibc 2.3).
+# Only x86_64 AppImages are published; arm64 is not available upstream.
+install_mediainfo() {
+    if [[ $(uname -m) != "x86_64" ]]; then
+        echo "Warning: mediainfo AppImage is x86_64-only, skipping." >&2
+        return
+    fi
+    local url="https://mediaarea.net/download/binary/mediainfo/20.09/mediainfo-20.09.glibc2.3-x86_64.AppImage"
+    http_download "$url" "$LOCAL_BIN_DIR/mediainfo"
+    chmod +x "$LOCAL_BIN_DIR/mediainfo"
+    echo "Installed: mediainfo (AppImage)"
+}
+
 install_bin_tools() {
     echo "Installing binary tools..."
     mkdir -p "$LOCAL_BIN_DIR"
@@ -137,6 +150,7 @@ install_bin_tools() {
     run_gah astral-sh/uv             # also installs uvx
     run_gah fish-shell/fish-shell    # installs fish
     install_nvim                  # AppImage — gah would ambiguously match both AppImage and tarball
+    install_mediainfo             # AppImage — only x86_64 available upstream
     run_gah ip7z/7zip             # installs 7zz and 7zzs
 }
 

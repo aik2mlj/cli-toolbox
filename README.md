@@ -43,6 +43,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [lazygit](https://github.com/jesseduffield/lazygit) - An intuitive terminal UI for `git`.
   - With usually just a few keystrokes to perform pull, fetch, push, or commit, I found it much easier to use than git commands and all the GUI git tools. It also includes advanced git cherry-picking, rebasing, and stash management features at hand.
 - [mcat](https://github.com/Skardyy/mcat) - A modern `cat` alternative that renders markdown, images, and other file types directly in the terminal.
+- [mediainfo](https://mediaarea.net/en/MediaInfo) - Displays technical and tag information about media files. Useful for `yazi` preview.
 - [neovim](https://neovim.io/) - A hyperextensible Vim-based text editor. My choice of text editor.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - A modern (and much faster) alternative to `grep`. Recursively searches directories for a regex pattern.
 - [starship](https://starship.rs/) - A minimal, blazing-fast, and infinitely customizable prompt for any shell.
