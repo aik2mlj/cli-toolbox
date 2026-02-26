@@ -4,6 +4,12 @@
 #
 # @author Marek `marverix` Sierociński
 # @license Apache-2.0
+#
+# Vendored from https://github.com/get-gah/gah (v1.13.0)
+# Local modifications:
+#   - name_regexp_part: [a-z] → [a-z0-9] to allow digit-leading names (e.g. 7zip assets)
+#   - EXT_ALL_ARCHIVES: added .appimage as a recognised (non-extracted) extension
+#   - REGEXP_SKIP_FILES: added .sh to avoid installing bundled helper scripts (e.g. btop)
 
 # Pipeline mode
 set -e
