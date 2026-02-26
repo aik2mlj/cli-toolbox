@@ -6,7 +6,7 @@ Hi there, this repository contains configurations and scripts that I use to set 
 
 Use the [install.sh](./install.sh) script to manage the installation. By default, it will install all the binary tools to `~/.local/bin/`, backup the config files if you already have them, and copy the essential configs (for `tmux`, `fish`, `yazi`, and `lazygit`).
 
-In case you are using a shell other than `fish`, you need to [add `~/.local/bin` to your PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). For `fish` users this is already configured.
+In case you are using a shell other than `fish`, you need to add `~/.local/bin` to your [PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). If you would like to use `fish` (which I highly recommend) this is already configured.
 
 ```shell
 # clone the repository to your remote machine
