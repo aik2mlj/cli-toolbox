@@ -80,7 +80,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - [full-border.yazi](https://github.com/yazi-rs/plugins/tree/main/full-border.yazi) to make it look fancier.
   - [git.yazi](https://github.com/yazi-rs/plugins/tree/main/git.yazi) to show the status of git file changes in the file list.
   - [compress.yazi](https://github.com/KKV9/compress.yazi) to compress selected files to an archive (shortcut: `ca`).
-  - [mediainfo.yazi](https://github.com/boydaihungst/mediainfo.yazi) to show thumbnail using `ffmpeg` and media metadata using `mediainfo`.
+  - [mediainfo.yazi](https://github.com/boydaihungst/mediainfo.yazi) to show thumbnail using `ffmpeg` and media metadata using `mediainfo` (toggle showing metadata: `<f9>`).
 
 - `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
 
