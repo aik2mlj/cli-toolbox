@@ -152,6 +152,9 @@ install_configs() {
             echo "Installed $path"
         fi
     done
+
+    echo "Installing yazi plugins..."
+    PATH="$LOCAL_BIN_DIR:$PATH" "$LOCAL_BIN_DIR/ya" pkg upgrade
 }
 
 install_all_configs() {
@@ -187,6 +190,9 @@ install_all_configs() {
     done
 
     shopt -u dotglob
+
+    echo "Installing yazi plugins..."
+    PATH="$LOCAL_BIN_DIR:$PATH" "$LOCAL_BIN_DIR/ya" pkg upgrade
 }
 
 main() {
