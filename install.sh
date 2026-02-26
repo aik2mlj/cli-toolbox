@@ -191,13 +191,25 @@ install_all_configs() {
 }
 
 main() {
+    local install_all=false
+    local upgrade_only=false
+    for arg in "$@"; do
+        case "$arg" in
+            --overwrite)  OVERWRITE=true ;;
+            --all)        install_all=true ;;
+            --upgrade)    upgrade_only=true ;;
+        esac
+    done
+
+    if [ "$upgrade_only" = true ]; then
+        install_bin_tools
+        echo "✅ Upgrade complete."
+        return
+    fi
+
     install_bin_tools
 
-    if [ "${1:-}" == "--overwrite" ]; then
-        OVERWRITE=true
-        shift
-    fi
-    if [ "${1:-}" == "--all" ]; then
+    if [ "$install_all" = true ]; then
         install_all_configs
     else
         install_configs

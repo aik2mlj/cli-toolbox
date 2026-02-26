@@ -11,9 +11,12 @@ Please take a look at the [install.sh](./install.sh) script to see what it does.
 git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-server-configs
 
 # installation
-./install.sh  # the necessary configurations with backup.
-./install.sh --overwrite  # necessary confiurations without backup existing configuration files.
-./install.sh --all  # all configurations, for my personal use.
+./install.sh                      # install binaries + essential configs (with backup)
+./install.sh --overwrite          # same, without backing up existing config files
+./install.sh --all                # install binaries + all configs (for personal use)
+
+# upgrade all binary tools to their latest releases
+./install.sh --upgrade
 ```
 
 Notice that the configuration requires a patched font to display icons correctly. You can install one of the [nerd fonts](https://www.nerdfonts.com/) **locally** as you like and configure your terminal emulator to use it in the settings.
