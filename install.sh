@@ -72,14 +72,13 @@ ensure_jq() {
         exit 1
         ;;
     esac
-    local tmp_dir
-    tmp_dir="$(mktemp -d)"
+    mkdir -p "$LOCAL_BIN_DIR"
     http_download \
         "https://github.com/jqlang/jq/releases/latest/download/jq-linux-${arch}" \
-        "$tmp_dir/jq"
-    chmod +x "$tmp_dir/jq"
-    export PATH="$tmp_dir:$PATH"
-    echo "jq bootstrapped."
+        "$LOCAL_BIN_DIR/jq"
+    chmod +x "$LOCAL_BIN_DIR/jq"
+    export PATH="$LOCAL_BIN_DIR:$PATH"
+    echo "jq installed to $LOCAL_BIN_DIR/jq"
 }
 
 # Run gah to install a tool from GitHub releases.
