@@ -10,6 +10,7 @@
 #   - name_regexp_part: [a-z] → [a-z0-9] to allow digit-leading names (e.g. 7zip assets)
 #   - EXT_ALL_ARCHIVES: added .appimage as a recognised (non-extracted) extension
 #   - REGEXP_SKIP_FILES: added .sh to avoid installing bundled helper scripts (e.g. btop)
+#   - command_install: prefer musl over gnu builds when multiple assets match (server portability)
 
 # Pipeline mode
 set -e
@@ -515,7 +516,15 @@ function command_install() {
 	if [[ $(echo "$download_url" | wc -l) -gt 1 ]]; then
 		print_yellow "Several download URLs were found which match your OS and arch."
 
-		if [[ "$GAH_UNATTENDED" == "true" ]]; then
+		# Prefer musl builds over gnu for better portability on servers with older glibc.
+		# Safe to grep here: gah already filtered by arch, so multiple matches are
+		# same-arch variants (e.g. x86_64-linux-gnu vs x86_64-linux-musl), never cross-arch.
+		local musl_url
+		musl_url=$(echo "$download_url" | grep -i "musl" | head -1)
+		if [[ -n "$musl_url" ]]; then
+			download_url="$musl_url"
+			print_yellow "Preferring musl build: $download_url"
+		elif [[ "$GAH_UNATTENDED" == "true" ]]; then
 			# Select based on unattended_select_index
 			download_url=$(echo "$download_url" | sed -n "${unattended_select_index}p" 2>/dev/null || true)
 			if [[ -z "$download_url" ]]; then
