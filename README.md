@@ -26,7 +26,7 @@ Notice that some of the tools requires a patched font to display icons correctly
 
 ## Binary tools included
 
-The binary tools are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored and modified in [`tools/gah`](tools/gah). It will automatically detect your system architecture and download the appropriate binaries.
+The binary tools are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored and modified in [`tools/gah`](tools/gah)). It will automatically detect your system architecture and download the appropriate binaries. All tools, including `jq` (required by gah) if not already present, are installed to `~/.local/bin/` without root.
 
 Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
 
