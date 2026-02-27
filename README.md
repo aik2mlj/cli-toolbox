@@ -1,6 +1,8 @@
-# Lejun's configurations for remote Linux servers
+# Lejun's Toolbox for Remote Linux Servers
 
-Hi there, this repository contains configurations and scripts that I use to set up my development environment quickly and efficiently.
+Hi there, this repository contains configurations and scripts that I use to set up my **remote** development environment **without root access**. It will install a set of command-line tools that I find essential for daily development, along with their configurations.
+
+It also applies (and is highly recommended) for a **local** Linux/macOS machine, only that for installing the binaries I would recommend using your package manager (e.g., `apt`, `dnf`, `pacman`, `brew`, etc.) instead. More recommendations and configs for local desktop setup in my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Installation
 
@@ -9,24 +11,30 @@ Use the [install.sh](./install.sh) script to manage the installation. By default
 In case you are using a shell other than `fish`, you need to add `~/.local/bin` to your [PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). If you would like to use `fish` (which I highly recommend) this is already configured.
 
 ```shell
-# clone the repository to your remote machine
+# clone the repository
 git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-server-configs
 
 # installation
 ./install.sh                      # install binaries + essential configs (with backup)
 ./install.sh --overwrite          # same, without backing up existing config files
-./install.sh --all                # install binaries + all configs (for personal use)
+./install.sh --all                # install binaries + all configs (for my personal use), may contain some preferences you don't need
 
-# upgrade all binary tools to their latest releases
-# you can also run this to only install binaries without configs
-./install.sh --upgrade
+# only install binary tools without configs
+# this is equivalent to upgrading all the binaries
+./install.sh --binary-only
+./install.sh --upgrade  # equivalent to --binary-only
+
+# skip installing binary tools
+# use this if you are on a local machine, you should install the tools using your package manager
+./install.sh --config-only
+
+# of course you can combine the options
+./install.sh --config-only --overwrite --all
 ```
 
 Notice that some of the tools requires a patched font to display icons correctly. You can install one of the [nerd fonts](https://www.nerdfonts.com/) **locally** as you like and configure your terminal emulator to use it in the settings.
 
-## Binary tools included
-
-The binary tools are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored and modified in [`tools/gah`](tools/gah)). It will automatically detect your system architecture and download the appropriate binaries. All tools, including `jq` (required by gah) if not already present, are installed to `~/.local/bin/` without root.
+## Binary Tools Included
 
 Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
 
@@ -53,7 +61,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
-## Configuration details
+## Configuration Details
 
 - `tmux` - I use `tmux` as my terminal multiplexer. This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
   - Please see the [original repository](https://github.com/gpakosz/.tmux) for keybindings and smart usages.
@@ -86,6 +94,8 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 ## Optional
 
+- Default shell to `fish`: You may want to be in `fish` shell by default. If this is a local setup, you can set it as the default shell by `chsh -s $(which fish)`. If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
+
 - Neovim configuration: Only if you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. Check [my configuration](https://github.com/aik2mlj/lazyvim-config) if you want to take some reference.
 
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
@@ -97,3 +107,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - My choice of terminal emulator? [Kitty](https://sw.kovidgoyal.net/kitty/), [WezTerm](https://wezterm.org/), or [iTerm2](https://iterm2.com/).
 
 - Wanna manage your configuration files gracefully? Check out [dotfiles](https://dotfiles.github.io/) for tutorials and tools. My choice is [chezmoi](https://www.chezmoi.io/).
+
+## Technical Details
+
+If you choose to use this script to install the binaries (instead of using your package manager if you are on a local machine), they are downloaded at install time from their official GitHub releases using [gah](https://github.com/get-gah/gah) (vendored and modified in [`tools/gah`](tools/gah)). It will automatically detect your system architecture and download the appropriate binaries. All tools, including `jq` (required by gah) if not already present, are installed to `~/.local/bin/` without root.

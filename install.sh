@@ -211,22 +211,26 @@ install_all_configs() {
 
 main() {
     local install_all=false
-    local upgrade_only=false
+    local binary_only=false
+    local config_only=false
     for arg in "$@"; do
         case "$arg" in
-            --overwrite)  OVERWRITE=true ;;
-            --all)        install_all=true ;;
-            --upgrade)    upgrade_only=true ;;
+            --overwrite)    OVERWRITE=true ;;
+            --all)          install_all=true ;;
+            --upgrade | --binary-only) binary_only=true ;;
+            --config-only)  config_only=true ;;
         esac
     done
 
-    if [ "$upgrade_only" = true ]; then
+    if [ "$binary_only" = true ]; then
         install_bin_tools
         echo "✅ Upgrade complete."
         return
     fi
 
-    install_bin_tools
+    if [ "$config_only" = false ]; then
+        install_bin_tools
+    fi
 
     if [ "$install_all" = true ]; then
         install_all_configs
