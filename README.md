@@ -1,38 +1,56 @@
-# Lejun's Toolbox for Remote Linux Servers
+# Lejun's Command-Line Toolbox
 
-Hi there, this repository contains configurations and scripts that I use to set up my **remote** development environment **without root access**. It will install a set of command-line tools that I find essential for daily development, along with their configurations.
+A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on any Linux or macOS machine — whether you're on a **remote server without root access** or setting up a **local development environment**.
 
-It also applies (and is highly recommended) for a **local** Linux/macOS machine, only that for installing the binaries I would recommend using your package manager (e.g., `apt`, `dnf`, `pacman`, `brew`, etc.) instead. More recommendations and configs for local desktop setup in my [dotfile repo](https://github.com/aik2mlj/chezmoi).
+The toolbox includes a set of tools I find essential for daily development (see [Binary Tools Included](#binary-tools-included) below), along with their configurations. For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Installation
 
-Use the [install.sh](./install.sh) script to manage the installation. By default, it will install all the binary tools to `~/.local/bin/`, backup the config files if you already have them, and copy the essential configs (for `tmux`, `fish`, `yazi`, and `lazygit`).
+The [install.sh](./install.sh) script handles everything. It backs up any existing configs before installing.
 
-In case you are using a shell other than `fish`, you need to add `~/.local/bin` to your [PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). If you would like to use `fish` (which I highly recommend) this is already configured.
+### Clone the Repository
 
 ```shell
-# clone the repository
 git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-server-configs
-
-# installation
-./install.sh                      # install binaries + essential configs (with backup)
-./install.sh --overwrite          # same, without backing up existing config files
-./install.sh --all                # install binaries + all configs (for my personal use), may contain some preferences you don't need
-
-# only install binary tools without configs
-# this is equivalent to upgrading all the binaries
-./install.sh --binary-only
-./install.sh --upgrade  # equivalent to --binary-only
-
-# skip installing binary tools
-# use this if you are on a local machine, you should install the tools using your package manager
-./install.sh --config-only
-
-# of course you can combine the options
-./install.sh --config-only --overwrite --all
 ```
 
-Notice that some of the tools requires a patched font to display icons correctly. You can install one of the [nerd fonts](https://www.nerdfonts.com/) **locally** as you like and configure your terminal emulator to use it in the settings.
+### For Remote Rootless Server
+
+This downloads all binaries to `~/.local/bin/` (no root needed) and installs configs:
+
+```shell
+./install.sh                # install binaries + essential configs (with backup)
+./install.sh --overwrite    # same, without backing up existing config files
+```
+
+To just install the binaries or to upgrade them:
+
+```shell
+# these are equivalent
+./install.sh --binary-only
+./install.sh --upgrade
+```
+
+### For Local Machine or Server with Root Access
+
+Use your package manager (`apt`, `dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
+
+```shell
+brew install <packages>                           # change it to your package manager
+./install.sh --config-only                        # install essential configs only
+./install.sh --config-only --overwrite            # install essential configs, overwrite existing
+```
+
+### Post Installation
+
+- If you prefer a shell other than `fish`, add `~/.local/bin` to your [PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). With `fish`, this is already configured.
+
+- Some tools require a [Nerd Font](https://www.nerdfonts.com/) to display icons correctly — install one locally and set it in your terminal emulator's settings.
+
+- You may want to set the default shell to `fish`.
+  - If this is a local setup, change the login shell with `chsh -s $(which fish)`.
+  - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
+    - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
 ## Binary Tools Included
 
@@ -79,7 +97,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - `ctrl + f` to search through your files under the current directory with `fzf`.
   - `ctrl + o` to open the file manager `yazi` and will change the current working directory when exiting (the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper) is configured in [`functions/yazi-cd.fish`](home/.config/fish/functions/yazi-cd.fish)).
   - `ls`, `ll`, etc. are mapped to `eza` that shows colors and icons.
-  - To make the shell loading faster, `conda init` is lazy-loaded only after you run `conda` command for the first time.
+  - To speed up the shell startup, `conda init` is lazy-loaded only after you run `conda` command for the first time.
 
 - `yazi` - The configuration files are located at [`~/.config/yazi/`](home/.config/yazi/). I basically installed some plugins to enhance the functionality and the look.
   - `shift + j/k` to navigate 5 times faster in the file list. `opt/alt + j/k` to seek 5 units up/down in the preview (e.g., see the next page of the previewed text file, or see the next frame of the previewed video).
@@ -93,8 +111,6 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
 
 ## Optional
-
-- Default shell to `fish`: You may want to be in `fish` shell by default. If this is a local setup, you can set it as the default shell by `chsh -s $(which fish)`. If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
 
 - Neovim configuration: Only if you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. Check [my configuration](https://github.com/aik2mlj/lazyvim-config) if you want to take some reference.
 
