@@ -2,7 +2,7 @@
 
 A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on any Linux or macOS machine — whether you're on a **remote server without root access** or setting up a **local development environment**.
 
-The toolbox includes a set of tools I find essential for daily development (see [Binary Tools Included](#binary-tools-included) below), along with their configurations. For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
+The toolbox includes a set of tools I find essential for daily development (see [CLI Tools Included](#cli-tools-included) below), along with their configurations. For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Installation
 
@@ -11,7 +11,7 @@ The [install.sh](./install.sh) script handles everything. It backs up any existi
 ### Clone the Repository
 
 ```shell
-git clone https://github.com/aik2mlj/remote-server-configs.git && cd remote-server-configs
+git clone https://github.com/aik2mlj/cli-toolbox.git && cd cli-toolbox
 ```
 
 ### For Remote Rootless Server
@@ -52,7 +52,7 @@ brew install <packages>                           # change it to your package ma
   - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
-## Binary Tools Included
+## CLI Tools Included
 
 Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
 
