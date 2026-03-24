@@ -194,11 +194,14 @@ install_all_configs() {
         for config_item in "$SOURCE_HOME/$spec_dir"/*; do
             config_rel_path="${config_item#$SOURCE_HOME/}"
             src="$config_item"
-            dest="$HOME_DIR/$spec_dir/"
+            dest="$HOME_DIR/$config_rel_path"
 
             backup_file "$dest"
+            if [ "$OVERWRITE" = true ] && [ -d "$dest" ]; then
+                rm -rf "$dest"
+            fi
             mkdir -p "$(dirname "$dest")"
-            cp -r "$src" "$dest"
+            cp -r "$src" "$(dirname "$dest")/"
             echo "Installed $config_rel_path"
         done
     done
