@@ -52,6 +52,8 @@ brew install <packages>                           # change it to your package ma
   - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
+- If you want to install custom binaries, try `gah help` for usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
+
 ## CLI Tools Included
 
 Here is a brief overview. I recommend browsing the quick start guide of each tool following the link, but only when you need it. Most of them are self-explanatory and intuitive to get started.
