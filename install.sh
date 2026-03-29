@@ -85,7 +85,6 @@ ensure_jq() {
 # Usage: run_gah <alias_or_owner/repo>
 run_gah() {
     local gah="$DOTFILES_DIR/tools/gah"
-    chmod +x "$gah"
     GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@"
 }
 
@@ -138,20 +137,26 @@ install_bin_tools() {
     run_gah sharkdp/fd
     run_gah junegunn/fzf
     run_gah jesseduffield/lazygit
-    run_gah sxyazi/yazi              # also installs ya
+    run_gah sxyazi/yazi # also installs ya
     run_gah ajeetdsouza/zoxide
     run_gah aristocratos/btop
-    run_gah Wilfred/difftastic       # installs difft
+    run_gah Wilfred/difftastic # installs difft
     run_gah bootandy/dust
     run_gah eza-community/eza
     run_gah Skardyy/mcat
-    run_gah BurntSushi/ripgrep       # installs rg
+    run_gah BurntSushi/ripgrep # installs rg
     run_gah starship/starship
-    run_gah astral-sh/uv             # also installs uvx
-    run_gah fish-shell/fish-shell    # installs fish
+    run_gah astral-sh/uv          # also installs uvx
+    run_gah fish-shell/fish-shell # installs fish
     install_nvim                  # AppImage — gah would ambiguously match both AppImage and tarball
     install_mediainfo             # AppImage — only x86_64 available upstream
     run_gah ip7z/7zip             # installs 7zz and 7zzs
+
+    # also install gah to ~/.local/bin/
+    cp "$DOTFILES_DIR/tools/gah" "$LOCAL_BIN_DIR/gah"
+    chmod +x "$LOCAL_BIN_DIR/gah"
+
+    echo "Binary tools installed to $LOCAL_BIN_DIR"
 }
 
 install_configs() {
@@ -218,10 +223,10 @@ main() {
     local config_only=false
     for arg in "$@"; do
         case "$arg" in
-            --overwrite)    OVERWRITE=true ;;
-            --all)          install_all=true ;;
-            --upgrade | --binary-only) binary_only=true ;;
-            --config-only)  config_only=true ;;
+        --overwrite) OVERWRITE=true ;;
+        --all) install_all=true ;;
+        --upgrade | --binary-only) binary_only=true ;;
+        --config-only) config_only=true ;;
         esac
     done
 
