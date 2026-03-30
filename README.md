@@ -52,7 +52,12 @@ brew install <packages>                           # change it to your package ma
   - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
-- If you want to install custom binaries, try `gah help` for usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
+- If you want to install additional binaries to `~/.local/bin/`, try `gah help` for usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
+
+  ```shell
+  # e.g., install lazydocker
+  gah install jesseduffield/lazydocker
+  ```
 
 ## CLI Tools Included
 
