@@ -135,6 +135,13 @@ install_mediainfo() {
     echo "Installed: mediainfo (AppImage)"
 }
 
+install_gah() {
+    mkdir -p "$LOCAL_BIN_DIR"
+    cp "$DOTFILES_DIR/tools/gah" "$LOCAL_BIN_DIR/gah"
+    chmod +x "$LOCAL_BIN_DIR/gah"
+    echo "Installed: gah to $LOCAL_BIN_DIR/gah"
+}
+
 install_bin_tools() {
     echo "Installing binary tools..."
     mkdir -p "$LOCAL_BIN_DIR"
@@ -162,8 +169,7 @@ install_bin_tools() {
     run_gah ip7z/7zip             # installs 7zz and 7zzs
 
     # also install gah to ~/.local/bin/
-    cp "$DOTFILES_DIR/tools/gah" "$LOCAL_BIN_DIR/gah"
-    chmod +x "$LOCAL_BIN_DIR/gah"
+    install_gah
 
     echo "Binary tools installed to $LOCAL_BIN_DIR"
 }
@@ -228,14 +234,22 @@ main() {
     local install_all=false
     local binary_only=false
     local config_only=false
+    local gah_only=false
     for arg in "$@"; do
         case "$arg" in
         --overwrite) OVERWRITE=true ;;
         --all) install_all=true ;;
         --upgrade | --binary-only) binary_only=true ;;
         --config-only) config_only=true ;;
+        --gah) gah_only=true ;;
         esac
     done
+
+    if [ "$gah_only" = true ]; then
+        install_gah
+        echo "✅ gah installed."
+        return
+    fi
 
     if [ "$binary_only" = true ]; then
         install_bin_tools
