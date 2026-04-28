@@ -1,6 +1,6 @@
 # Lejun's Command-Line Toolbox
 
-A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on any Linux or macOS machine — whether you're on a **remote server without root access** or setting up a **local development environment**.
+A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on Linux, macOS, or WSL on Windows — whether you're on a **remote server without root access** or setting up a **local development environment**.
 
 The toolbox includes a set of tools I find essential for daily development (see [CLI Tools Included](#cli-tools-included) below), along with their configurations. For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
@@ -14,16 +14,16 @@ The [install.sh](./install.sh) script handles everything. It backs up any existi
 git clone https://github.com/aik2mlj/cli-toolbox.git && cd cli-toolbox
 ```
 
-### For Remote Rootless Server
+### User-scoped (Rootless) Installation
 
-This downloads all binaries to `~/.local/bin/` (no root needed) and installs configs:
+Choose this if you don't have root access to the machine, e.g., a restricted server. Or you are on Linux distros with dated packages in the official repo, like Ubuntu or Debian (since this toolbox is only tested on the latest versions). This downloads all binaries to `~/.local/bin/` (no root needed) and installs configs:
 
 ```shell
 ./install.sh                # install binaries + essential configs (with backup)
 ./install.sh --overwrite    # same, without backing up existing config files
 ```
 
-To just install the binaries or to upgrade them:
+To just install the binaries or to upgrade (reinstall) them:
 
 ```shell
 # these are equivalent
@@ -31,33 +31,46 @@ To just install the binaries or to upgrade them:
 ./install.sh --upgrade
 ```
 
-### For Local Machine or Server with Root Access
+### System-wide Installation
 
-Use your package manager (`apt`, `dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
+If you are on a machine with sudo access, and your distro packages are reasonably up-to-date (Arch Linux, Fedora, macOS), use your package manager (`dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
 
 ```shell
-brew install <packages>                           # change it to your package manager
+# one-liner for macOS
+brew install fish btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship uv yazi zoxide
+# one-liner for Arch Linux
+paru -S --needed fish btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship uv yazi zoxide
+
+# apply the configs
 ./install.sh --config-only                        # install essential configs only
 ./install.sh --config-only --overwrite            # install essential configs, overwrite existing
 ```
 
+Do remember to upgrade the binaries from time to time with your package manager.
+
+### Customized Installation
+
+If you just want to install a few tools missing from your repo, or some additional tools that are not included here, you can use [gah](https://github.com/get-gah/gah) to manually install them:
+
+```shell
+./install.sh --gah                                # this installs gah, the binary installer, to ~/.local/bin/
+gah install Skardyy/mcat                          # say, mcat is not in your repo
+gah install jesseduffield/lazydocker              # install lazydocker, which is not included in the toolbox
+```
+
+Run `gah --help` to check the usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
+
 ### Post Installation
 
-- If you prefer a shell other than `fish`, add `~/.local/bin` to your [PATH](https://www.howtogeek.com/658904/how-to-add-a-directory-to-your-path-in-linux/). With `fish`, this is already configured.
-
-- Some tools require a [Nerd Font](https://www.nerdfonts.com/) to display icons correctly — install one locally and set it in your terminal emulator's settings.
+- Use a modern terminal emulator that renders images and [Nerd Font](https://www.nerdfonts.com/) well. I recommend [Ghostty](https://ghostty.org/) which just works out-of-the-box, or [Kitty](https://sw.kovidgoyal.net/kitty/) if you need more features and extensive configurability.
 
 - You may want to set the default shell to `fish`.
-  - If this is a local setup, change the login shell with `chsh -s $(which fish)`.
+  - If this is a local setup, change the login shell with `chsh -s $(which fish)`. If this fails, add `fish` to `/etc/shells` first with `sudo sh -c 'echo $(which fish) >> /etc/shells'`.
+    - You may also just need to set `fish` as a command to run at launch in your terminal emulator's settings without changing the login shell.
   - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
-- If you want to install additional binaries to `~/.local/bin/`, try `gah help` for usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
-
-  ```shell
-  # e.g., install lazydocker
-  gah install jesseduffield/lazydocker
-  ```
+- If you want to install additional binaries to `~/.local/bin/`, see [Customized Installation](#customized-installation)
 
 ## CLI Tools Included
 
@@ -127,9 +140,9 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - [nvtop](https://github.com/Syllo/nvtop) or [nvitop](https://github.com/XuehaiPan/nvitop) for GPU monitoring: If you are working with GPUs, these tools provide a nice terminal UI to monitor GPU usage, memory, and processes.
 
-- My choice of terminal emulator? [Kitty](https://sw.kovidgoyal.net/kitty/), [WezTerm](https://wezterm.org/), or [iTerm2](https://iterm2.com/).
-
 - Wanna manage your configuration files gracefully? Check out [dotfiles](https://dotfiles.github.io/) for tutorials and tools. My choice is [chezmoi](https://www.chezmoi.io/).
+
+- For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Technical Details
 
