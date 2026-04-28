@@ -25,6 +25,15 @@ ALL_CONFIG_SPECIAL_DIR=(
     ".ssh"
 )
 
+upgrade_yazi_plugins() {
+    if PATH="$LOCAL_BIN_DIR:$PATH" command -v ya >/dev/null 2>&1; then
+        echo "Installing yazi plugins..."
+        PATH="$LOCAL_BIN_DIR:$PATH" ya pkg upgrade
+    else
+        echo "Warning: ya not found, skipping yazi plugin upgrade." >&2
+    fi
+}
+
 backup_file() {
     local target="$1"
     if [ "$OVERWRITE" = true ]; then
@@ -172,8 +181,7 @@ install_configs() {
         fi
     done
 
-    echo "Installing yazi plugins..."
-    PATH="$LOCAL_BIN_DIR:$PATH" "$LOCAL_BIN_DIR/ya" pkg upgrade
+    upgrade_yazi_plugins
 }
 
 install_all_configs() {
@@ -213,8 +221,7 @@ install_all_configs() {
 
     shopt -u dotglob
 
-    echo "Installing yazi plugins..."
-    PATH="$LOCAL_BIN_DIR:$PATH" "$LOCAL_BIN_DIR/ya" pkg upgrade
+    upgrade_yazi_plugins
 }
 
 main() {
