@@ -142,6 +142,40 @@ install_gah() {
     echo "Installed: gah to $LOCAL_BIN_DIR/gah"
 }
 
+# Persist $LOCAL_BIN_DIR on PATH for the user's login shell ($SHELL),
+# skipping if the rc file already mentions .local/bin.
+ensure_local_bin_in_path() {
+    local shell_name="${SHELL##*/}"
+    local config line
+    case "$shell_name" in
+    fish)
+        config="$HOME_DIR/.config/fish/config.fish"
+        line="fish_add_path -g $LOCAL_BIN_DIR"
+        ;;
+    bash)
+        config="$HOME_DIR/.bashrc"
+        line='export PATH="$HOME/.local/bin:$PATH"'
+        ;;
+    zsh)
+        config="$HOME_DIR/.zshrc"
+        line='export PATH="$HOME/.local/bin:$PATH"'
+        ;;
+    *)
+        echo "Warning: unknown shell '$SHELL', skipping PATH update." >&2
+        return
+        ;;
+    esac
+
+    if [[ ":$PATH:" == *":$LOCAL_BIN_DIR:"* ]]; then
+        echo "$LOCAL_BIN_DIR already on PATH"
+        return
+    fi
+
+    mkdir -p "$(dirname "$config")"
+    printf '\n%s\n' "$line" >>"$config"
+    echo "Added $LOCAL_BIN_DIR to PATH in $config"
+}
+
 install_bin_tools() {
     echo "Installing binary tools..."
     mkdir -p "$LOCAL_BIN_DIR"
@@ -247,12 +281,14 @@ main() {
 
     if [ "$gah_only" = true ]; then
         install_gah
+        ensure_local_bin_in_path
         echo "✅ gah installed."
         return
     fi
 
     if [ "$binary_only" = true ]; then
         install_bin_tools
+        ensure_local_bin_in_path
         echo "✅ Upgrade complete."
         return
     fi
@@ -267,6 +303,7 @@ main() {
         install_configs
     fi
 
+    ensure_local_bin_in_path
     echo "✅ Installation complete."
 }
 
