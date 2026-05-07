@@ -208,6 +208,24 @@ install_bin_tools() {
     echo "Binary tools installed to $LOCAL_BIN_DIR"
 }
 
+install_nvim_config() {
+    echo "Installing Neovim config..."
+    local rel_path=".config/nvim"
+    local src="$SOURCE_HOME/$rel_path"
+    local dest="$HOME_DIR/$rel_path"
+    if [ ! -e "$src" ]; then
+        echo "Warning: $src not found, skipping." >&2
+        return
+    fi
+    backup_file "$dest"
+    if [ "$OVERWRITE" = true ] && [ -d "$dest" ]; then
+        rm -rf "$dest"
+    fi
+    mkdir -p "$(dirname "$dest")"
+    cp -r "$src" "$dest"
+    echo "Installed $rel_path"
+}
+
 install_configs() {
     echo "Installing essential config files..."
     for path in "${ESSENTIAL_CONFIGS[@]}"; do
@@ -269,6 +287,7 @@ main() {
     local binary_only=false
     local config_only=false
     local gah_only=false
+    local nvim_only=false
     for arg in "$@"; do
         case "$arg" in
         --overwrite) OVERWRITE=true ;;
@@ -276,6 +295,7 @@ main() {
         --upgrade | --binary-only) binary_only=true ;;
         --config-only) config_only=true ;;
         --gah) gah_only=true ;;
+        --nvim) nvim_only=true ;;
         esac
     done
 
@@ -283,6 +303,12 @@ main() {
         install_gah
         ensure_local_bin_in_path
         echo "✅ gah installed."
+        return
+    fi
+
+    if [ "$nvim_only" = true ]; then
+        install_nvim_config
+        echo "✅ Neovim config installed."
         return
     fi
 

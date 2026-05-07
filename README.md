@@ -2,7 +2,7 @@
 
 A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on Linux, macOS, or WSL on Windows — whether you're on a **remote server without root access** or setting up a **local development environment**.
 
-The toolbox includes a set of tools I find essential for daily development (see [CLI Tools Included](#cli-tools-included) below), along with their configurations. For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
+The toolbox includes a set of tools I find essential for daily development (see [CLI Tools Included](#cli-tools-included) below), along with their configurations. For local (Linux) desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Installation
 
@@ -101,14 +101,6 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 ## Configuration Details
 
-- `tmux` - I use `tmux` as my terminal multiplexer. This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
-  - Please see the [original repository](https://github.com/gpakosz/.tmux) for keybindings and smart usages.
-    - It adds a more handy prefix `ctrl + a` (compared to the default `ctrl + b`).
-    - It includes some useful keybindings, such as `<prefix> + h/j/k/l` to switch between panes, and `<prefix> Ctrl + h/j/k/l` to switch between windows.
-  - My personal tweaks are under the _user customizations_ section in the [`~/.tmux.conf.local`](home/.tmux.conf.local) file.
-    - The default shell in `tmux` is set to `fish`. You can change it to your preferred shell by modifying the `default-shell` line.
-    - A fix that enable ssh agent forwarding to work after re-attaching to `tmux` is included. See [this blog](https://werat.dev/blog/happy-ssh-agent-forwarding/) for more details.
-
 - `fish` - I use `fish` as my shell. The configuration includes some useful functions, abbreviations and aliases. Please see the main configuration file at [`~/.config/fish/config.fish`](home/.config/fish/config.fish) for details. Some things to note:
   - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory.
   - The default prompt is set to use `starship`, which provides a nice and informative prompt.
@@ -130,9 +122,23 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
 
+- `tmux` - This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
+  - Please see the [original repository](https://github.com/gpakosz/.tmux) for keybindings and smart usages.
+    - It adds a more handy prefix `ctrl + a` (compared to the default `ctrl + b`).
+    - It includes some useful keybindings, such as `<prefix> + h/j/k/l` to switch between panes, and `<prefix> Ctrl + h/j/k/l` to switch between windows.
+  - My personal tweaks are under the _user customizations_ section in the [`~/.tmux.conf.local`](home/.tmux.conf.local) file.
+    - The default shell in `tmux` is set to `fish`. You can change it to your preferred shell by modifying the `default-shell` line.
+    - A fix that enable ssh agent forwarding to work after re-attaching to `tmux` is included. See [this blog](https://werat.dev/blog/happy-ssh-agent-forwarding/) for more details.
+
 ## Optional
 
-- Neovim configuration: Only if you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. Check [my configuration](https://github.com/aik2mlj/lazyvim-config) if you want to take some reference.
+- Neovim configuration: If you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. This repo contains a minimum Lazyvim config tweaked to my liking. You can copy the Neovim config in this repo by
+
+  ```shell
+  ./install.sh --nvim
+  ```
+
+- If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at the config files in the repo before installing.
 
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
 
@@ -142,7 +148,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - Wanna manage your configuration files gracefully? Check out [dotfiles](https://dotfiles.github.io/) for tutorials and tools. My choice is [chezmoi](https://www.chezmoi.io/).
 
-- For more local desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
+- For local (Linux) desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
 ## Technical Details
 
