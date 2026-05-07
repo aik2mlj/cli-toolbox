@@ -63,6 +63,7 @@ Run `gah --help` to check the usage. Consult the [gah](https://github.com/get-ga
 ### Post Installation
 
 - Use a modern terminal emulator that renders images and [Nerd Font](https://www.nerdfonts.com/) well. I recommend [Ghostty](https://ghostty.org/) which just works out-of-the-box, or [Kitty](https://sw.kovidgoyal.net/kitty/) if you need more features and extensive configurability.
+  - You may find it very helpful knowing your emulator's tab / window management and various keybindings. For Ghostty, take a look at this [cheat sheet](https://ricoberger.de/cheat-sheets/ghostty/).
 
 - You may want to set the default shell to `fish`.
   - If this is a local setup, change the login shell with `chsh -s $(which fish)`. If this fails, add `fish` to `/etc/shells` first with `sudo sh -c 'echo $(which fish) >> /etc/shells'`.
@@ -96,7 +97,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [uv](https://docs.astral.sh/uv/) - An extremely fast Python package and project manager, written in Rust.
   - I truly recommend this over `conda` or `venv` for managing Python environments in most cases. It's a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more. Plus it's 10-100x faster than `pip`.
 - [yazi](https://yazi-rs.github.io/) - A blazing fast terminal file manager written in Rust.
-  - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/).
+  - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
 ## Configuration Details
@@ -122,12 +123,12 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
 
-- `tmux` - This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
+- `tmux` - I usually rely on my terminal emulator's tab / window management for multi-tasking on a local machine. But when working on remote servers, `tmux` is essential to keep sessions alive when you disconnect. This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
   - Please see the [original repository](https://github.com/gpakosz/.tmux) for keybindings and smart usages.
     - It adds a more handy prefix `ctrl + a` (compared to the default `ctrl + b`).
     - It includes some useful keybindings, such as `<prefix> + h/j/k/l` to switch between panes, and `<prefix> Ctrl + h/j/k/l` to switch between windows.
   - My personal tweaks are under the _user customizations_ section in the [`~/.tmux.conf.local`](home/.tmux.conf.local) file.
-    - The default shell in `tmux` is set to `fish`. You can change it to your preferred shell by modifying the `default-shell` line.
+    - The default shell in `tmux` is set to `fish`. You may change it to your preferred shell by modifying the `default-shell` line.
     - A fix that enable ssh agent forwarding to work after re-attaching to `tmux` is included. See [this blog](https://werat.dev/blog/happy-ssh-agent-forwarding/) for more details.
 
 ## Optional
@@ -138,7 +139,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   ./install.sh --nvim
   ```
 
-- If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at the config files in the repo before installing.
+- If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
 
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
 
