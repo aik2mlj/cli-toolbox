@@ -339,7 +339,7 @@ tmux_conf_copy_to_os_clipboard=true
 setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 set -g update-environment -r
 
-set -g default-shell $HOME/.local/bin/fish
+if-shell "command -v fish" "set -g default-shell '#(command -v fish)'"
 
 # increase history size
 #set -g history-limit 10000
