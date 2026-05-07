@@ -60,6 +60,8 @@ gah install jesseduffield/lazydocker              # install lazydocker, which is
 
 Run `gah --help` to check the usage. Consult the [gah](https://github.com/get-gah/gah) documentation for more details.
 
+And of course, you can manually copy individual config files in this repo to their respective location in your home directory.
+
 ### Post Installation
 
 - Use a modern terminal emulator that renders images and [Nerd Font](https://www.nerdfonts.com/) well. I recommend [Ghostty](https://ghostty.org/) which just works out-of-the-box, or [Kitty](https://sw.kovidgoyal.net/kitty/) if you need more features and extensive configurability.
