@@ -196,7 +196,6 @@ install_bin_tools() {
     run_gah Skardyy/mcat
     run_gah BurntSushi/ripgrep # installs rg
     run_gah starship/starship
-    run_gah astral-sh/uv          # also installs uvx
     run_gah fish-shell/fish-shell # installs fish
     install_nvim                  # AppImage — gah would ambiguously match both AppImage and tarball
     install_mediainfo             # AppImage — only x86_64 available upstream

@@ -37,9 +37,9 @@ If you are on a machine with sudo access, and your distro packages are reasonabl
 
 ```shell
 # one-liner for macOS
-brew install fish btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship uv yazi zoxide
+brew install fish btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship yazi zoxide
 # one-liner for Arch Linux
-paru -S --needed fish btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship uv yazi zoxide
+paru -S --needed fish btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship yazi zoxide
 
 # apply the configs
 ./install.sh --config-only                        # install essential configs only
@@ -96,8 +96,6 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [neovim](https://neovim.io/) - A hyperextensible Vim-based text editor. My choice of text editor.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - A modern (and much faster) alternative to `grep`. Recursively searches directories for a regex pattern.
 - [starship](https://starship.rs/) - A minimal, blazing-fast, and infinitely customizable prompt for any shell.
-- [uv](https://docs.astral.sh/uv/) - An extremely fast Python package and project manager, written in Rust.
-  - I truly recommend this over `conda` or `venv` for managing Python environments in most cases. It's a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more. Plus it's 10-100x faster than `pip`.
 - [yazi](https://yazi-rs.github.io/) - A blazing fast terminal file manager written in Rust.
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
@@ -142,6 +140,8 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   ```
 
 - If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
+
+- [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust. Highly recommended over `conda` or `venv` for managing Python environments in most cases — a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more, and 10–100x faster than `pip`. Install with `gah install astral-sh/uv` or your package manager.
 
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
 
