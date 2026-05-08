@@ -184,6 +184,7 @@ install_bin_tools() {
     ensure_jq
 
     # Install via gah (fetches latest releases from GitHub, auto-detects OS/arch)
+    run_gah sharkdp/bat
     run_gah sharkdp/fd
     run_gah junegunn/fzf
     run_gah jesseduffield/lazygit

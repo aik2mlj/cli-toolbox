@@ -37,9 +37,9 @@ If you are on a machine with sudo access, and your distro packages are reasonabl
 
 ```shell
 # one-liner for macOS
-brew install fish btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship yazi zoxide
+brew install fish bat btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship yazi zoxide
 # one-liner for Arch Linux
-paru -S --needed fish btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship yazi zoxide
+paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship yazi zoxide
 
 # apply the configs
 ./install.sh --config-only                        # install essential configs only
@@ -81,6 +81,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - [fish](https://fishshell.com/) - A smart and user-friendly command line shell. Smarter tabs, autocompletion and syntax highlighting built-in.
   - Recommended reading: The fish shell [tutorial](https://fishshell.com/docs/current/tutorial.html) and [interactive guide](https://fishshell.com/docs/current/interactive.html).
+- [bat](https://github.com/sharkdp/bat) - A `cat` clone with syntax highlighting and Git integration. Used by `fzf.fish` to preview files in directory search.
 - [btop](https://github.com/aristocratos/btop) - A cool monitoring tool for system resources. `htop` alternative.
 - [difftastic](https://difftastic.wilfred.me.uk/): A structural diff tool that understands syntax.
   - It provides a more intuitive and readable diff output compared to `diff` or `git diff`, especially for code changes.
@@ -106,9 +107,10 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory.
   - The default prompt is set to use `starship`, which provides a nice and informative prompt.
   - The default editor is set to `neovim`. `vim` will become `nvim`. You can comment out the line if you don't want this behavior.
-  - `ctrl + r` to search through your command history with `fzf`.
-  - `ctrl + f` to search through your files under the current directory with `fzf`.
   - `ctrl + o` to open the file manager `yazi` and will change the current working directory when exiting (the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper) is configured in [`functions/yazi-cd.fish`](home/.config/fish/functions/yazi-cd.fish)).
+  - Fuzzy-finder keybindings come from [fzf.fish](https://github.com/PatrickF1/fzf.fish).
+    - `ctrl + r` to search through your command history.
+    - `ctrl + f` to search through your files under the current directory.
   - `ls`, `ll`, etc. are mapped to `eza` that shows colors and icons.
   - To speed up the shell startup, `conda init` is lazy-loaded only after you run `conda` command for the first time.
 
