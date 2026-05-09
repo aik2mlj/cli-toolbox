@@ -5,16 +5,6 @@ linemode = "size"
 [preview]
 wrap = "yes"
 
-[[plugin.prepend_fetchers]]
-id = "git"
-url = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id = "git"
-url = "*/"
-run = "git"
-
 [plugin]
 prepend_previewers = [
     # mcat is faster and prettier than glow. need to strip the OSC 8 hyperlink escape sequences
@@ -36,4 +26,8 @@ prepend_preloaders = [
     { mime = "application/subrip", run = "mediainfo" },
     # Adobe Illustrator, Adobe Photoshop is image/adobe.photoshop, already handled above
     { mime = "application/postscript", run = "mediainfo" },
+]
+prepend_fetchers = [
+    { url = "*", run = "git", group = "git" },
+    { url = "*/", run = "git", group = "git" },
 ]
