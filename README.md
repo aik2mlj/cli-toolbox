@@ -145,6 +145,8 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 
 - [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust. Highly recommended over `conda` or `venv` for managing Python environments in most cases — a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more, and 10–100x faster than `pip`. Install with `gah install astral-sh/uv` or your package manager.
 
+- [fresh](https://getfresh.dev/): A powerful terminal text editor and IDE with zero learning curve. Give it a try if you want a VSCode-like experience in the terminal.
+
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
 
 - [Lazydocker](https://github.com/jesseduffield/lazydocker): Similar to `lazygit`, but for Docker. It provides a terminal UI for managing Docker containers, images, and volumes.
