@@ -97,32 +97,8 @@ run_gah() {
     GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@"
 }
 
-# Neovim: explicitly fetch the AppImage rather than letting gah pick between
-# the AppImage and tarball (both match gah's regex for neovim/neovim).
-install_nvim() {
-    local arch
-    case $(uname -m) in
-    x86_64) arch="x86_64" ;;
-    aarch64 | arm64) arch="arm64" ;;
-    *)
-        echo "Warning: unsupported arch for nvim, skipping." >&2
-        return
-        ;;
-    esac
-    local asset="nvim-linux-${arch}.appimage"
-    local url
-    url=$(http_download "https://api.github.com/repos/neovim/neovim/releases/latest" /dev/stdout |
-        jq -r --arg a "$asset" '.assets[] | select(.name == $a) | .browser_download_url')
-    [[ -z "$url" ]] && {
-        echo "Warning: nvim AppImage not found, skipping." >&2
-        return
-    }
-    http_download "$url" "$LOCAL_BIN_DIR/nvim"
-    chmod +x "$LOCAL_BIN_DIR/nvim"
-    echo "Installed: nvim (AppImage)"
-}
-
 # MediaInfo: AppImage for maximum glibc compatibility (bundles glibc 2.3).
+# MediaArea does not publish Linux binaries on GitHub releases; custom URL required.
 # Only x86_64 AppImages are published; arm64 is not available upstream.
 install_mediainfo() {
     if [[ $(uname -m) != "x86_64" ]]; then
@@ -198,9 +174,18 @@ install_bin_tools() {
     run_gah BurntSushi/ripgrep # installs rg
     run_gah starship/starship
     run_gah fish-shell/fish-shell # installs fish
-    install_nvim                  # AppImage — gah would ambiguously match both AppImage and tarball
-    install_mediainfo             # AppImage — only x86_64 available upstream
+    run_gah neovim/neovim         # gah picks AppImage (index 1) over tarball — both match but AppImage is preferred
+    install_mediainfo             # custom URL — MediaArea has no GitHub release binaries
     run_gah ip7z/7zip             # installs 7zz and 7zzs
+
+    # yazi optional dependencies (preview thumbnails, PDF, SVG, image conversion)
+    run_gah linebender/resvg
+    run_gah BtbN/FFmpeg-Builds # installs ffmpeg, ffprobe, ffplay (static GPL build)
+    run_gah ImageMagick/ImageMagick
+    # imagemagick AppImage is installed as 'imagemagick'; rename to the canonical command
+    for f in "$LOCAL_BIN_DIR"/imagemagick*; do
+        [[ -f "$f" ]] && mv "$f" "$LOCAL_BIN_DIR/magick" && echo "Renamed to: magick" && break
+    done
 
     # also install gah to ~/.local/bin/
     install_gah

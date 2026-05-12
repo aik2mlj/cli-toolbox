@@ -11,6 +11,8 @@
 #   - EXT_ALL_ARCHIVES: added .appimage as a recognised (non-extracted) extension
 #   - REGEXP_SKIP_FILES: added .sh to avoid installing bundled helper scripts (e.g. btop)
 #   - command_install: prefer musl over gnu builds when multiple assets match (server portability)
+#   - get_combined_os_arch_regexp_part: handle combined tokens like linux64/linuxarm64 (e.g. FFmpeg-Builds)
+#   - find_download_url: AppImage fallback — match by arch alone when OS identifier absent (e.g. ImageMagick)
 
 # Pipeline mode
 set -e
@@ -192,18 +194,42 @@ function get_arch_regexp_part() {
 	esac
 }
 
+# Combined OS+arch tokens used by some upstreams (e.g. BtbN/FFmpeg-Builds uses linux64/linuxarm64).
+function get_combined_os_arch_regexp_part() {
+	case $(get_os) in
+	linux)
+		case $(get_arch) in
+		amd64) echo '[._-](linux64)' ;;
+		arm64) echo '[._-](linuxarm64)' ;;
+		*) echo '__no_match__' ;;
+		esac
+		;;
+	*) echo '__no_match__' ;;
+	esac
+}
+
 function get_filename_regexp() {
 	local name_regexp_part='([a-z0-9][a-z0-9_-]+?)'
 	local version_regexp_part='([_-]v?[0-9.]+)?'
 	local os_regexp_part=$(get_os_regexp_part)
 	local arch_regexp_part=$(get_arch_regexp_part)
+	local combined_os_arch_regexp_part=$(get_combined_os_arch_regexp_part)
 	local suffix_regexp_part='([_-][a-z0-9_-]+)?'
 
 	local regexp="${name_regexp_part}${version_regexp_part}"
-	regexp+="(${os_regexp_part}${arch_regexp_part}|${arch_regexp_part}${os_regexp_part})"
+	regexp+="(${os_regexp_part}${arch_regexp_part}|${arch_regexp_part}${os_regexp_part}|${combined_os_arch_regexp_part})"
 	regexp+="${suffix_regexp_part}"
 	regexp+="(${EXT_ALL_ARCHIVES})?"
 	echo "$regexp"
+}
+
+# AppImage fallback: match by arch alone when the asset name lacks an OS identifier.
+# AppImages are Linux-specific by design, so the OS is implicit.
+function get_appimage_name_regexp() {
+	local arch_regexp_part=$(get_arch_regexp_part)
+	# Group 1: tool name — letters and hyphens only (no trailing digit) so the name
+	# stops cleanly before the version number (e.g. "imagemagick" not "imagemagick-7").
+	echo "^([a-z][a-z-]+)[._-].*${arch_regexp_part}([_-][a-z0-9_-]+)?\.appimage$"
 }
 
 function get_name_regexp() {
@@ -346,6 +372,26 @@ function find_download_url() {
 	done
 
 	# If asset matched, return
+	if [[ "$found" == "true" ]]; then
+		return
+	fi
+
+	# AppImage fallback: when no OS-tagged asset matched, accept AppImages that have the
+	# correct arch in their name (AppImages are Linux-only, so no OS tag is needed).
+	local appimage_regexp=$(get_appimage_name_regexp)
+	for name in $(jq -r '.assets[].name' "$release_json"); do
+		local lower_name=$(echo "$name" | tr '[A-Z]' '[a-z]')
+		if regex_match "$lower_name" "$appimage_regexp"; then
+			if regex_match "$lower_name" "$REGEXP_IGNORE_PATTERN"; then
+				print_debug "  $name ... AppImage fallback: Ignored"
+			else
+				print_debug "  $name ... AppImage fallback: MATCH!"
+				found="true"
+				jq -r --arg name "$name" '.assets[] | select(.name == $name) | .browser_download_url' "$release_json"
+			fi
+		fi
+	done
+
 	if [[ "$found" == "true" ]]; then
 		return
 	fi
@@ -524,26 +570,50 @@ function command_install() {
 		if [[ -n "$musl_url" ]]; then
 			download_url="$musl_url"
 			print_yellow "Preferring musl build: $download_url"
-		elif [[ "$GAH_UNATTENDED" == "true" ]]; then
-			# Select based on unattended_select_index
-			download_url=$(echo "$download_url" | sed -n "${unattended_select_index}p" 2>/dev/null || true)
-			if [[ -z "$download_url" ]]; then
-				throw_error 22 "Invalid selection index ($unattended_select_index) for unattended mode. No URL at that index."
+		fi
+
+		# Prefer static (non-shared) builds when shared-library variants are also present.
+		if echo "$download_url" | grep -qEi "[-_]shared"; then
+			local non_shared_url
+			non_shared_url=$(echo "$download_url" | grep -Eiv "[-_]shared" | head -1)
+			if [[ -n "$non_shared_url" ]]; then
+				download_url="$non_shared_url"
+				print_yellow "Preferring static (non-shared) build: $download_url"
 			fi
+		fi
 
-			print_yellow "Unattended mode, using download URL at index $unattended_select_index: $download_url"
-
-		else
-			print_yellow "Please select one:"
-			select url in $download_url; do
-				download_url=$url
-				break
-			done
-
-			if [[ -z "$download_url" ]]; then
-				throw_error 14 "No download URL was selected"
+		# Prefer gcc AppImages over clang when both are present (gcc uses older glibc, more portable).
+		if echo "$download_url" | grep -qEi "[-_]gcc[-_.]"; then
+			local gcc_url
+			gcc_url=$(echo "$download_url" | grep -Ei "[-_]gcc[-_.]" | head -1)
+			if [[ -n "$gcc_url" ]]; then
+				download_url="$gcc_url"
+				print_yellow "Preferring gcc build: $download_url"
 			fi
+		fi
 
+		if [[ $(echo "$download_url" | wc -l) -gt 1 ]]; then
+			if [[ "$GAH_UNATTENDED" == "true" ]]; then
+				# Select based on unattended_select_index
+				download_url=$(echo "$download_url" | sed -n "${unattended_select_index}p" 2>/dev/null || true)
+				if [[ -z "$download_url" ]]; then
+					throw_error 22 "Invalid selection index ($unattended_select_index) for unattended mode. No URL at that index."
+				fi
+
+				print_yellow "Unattended mode, using download URL at index $unattended_select_index: $download_url"
+
+			else
+				print_yellow "Please select one:"
+				select url in $download_url; do
+					download_url=$url
+					break
+				done
+
+				if [[ -z "$download_url" ]]; then
+					throw_error 14 "No download URL was selected"
+				fi
+
+			fi
 		fi
 	fi
 
@@ -612,6 +682,14 @@ function command_install() {
 		if [[ -n "$match" ]]; then
 			file_name="$match"
 			print_debug "OK, cleaned file name"
+		elif [[ "$lower_file_name" == *.appimage ]]; then
+			# AppImage fallback: clean name from AppImages that lack an OS identifier.
+			local appimage_regexp=$(get_appimage_name_regexp)
+			match=$(regex_capture "$lower_file_name" "$appimage_regexp" 1)
+			if [[ -n "$match" ]]; then
+				file_name="$match"
+				print_debug "OK, cleaned AppImage file name to: $file_name"
+			fi
 		fi
 
 		print_blue "Installing: $file_name"
