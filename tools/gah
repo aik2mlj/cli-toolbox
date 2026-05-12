@@ -13,6 +13,7 @@
 #   - command_install: prefer musl over gnu builds when multiple assets match (server portability)
 #   - get_combined_os_arch_regexp_part: handle combined tokens like linux64/linuxarm64 (e.g. FFmpeg-Builds)
 #   - find_download_url: AppImage fallback — match by arch alone when OS identifier absent (e.g. ImageMagick)
+#   - command_install: prefer static over shared builds; prefer non-shared when shared variants present
 
 # Pipeline mode
 set -e
@@ -579,16 +580,6 @@ function command_install() {
 			if [[ -n "$non_shared_url" ]]; then
 				download_url="$non_shared_url"
 				print_yellow "Preferring static (non-shared) build: $download_url"
-			fi
-		fi
-
-		# Prefer gcc AppImages over clang when both are present (gcc uses older glibc, more portable).
-		if echo "$download_url" | grep -qEi "[-_]gcc[-_.]"; then
-			local gcc_url
-			gcc_url=$(echo "$download_url" | grep -Ei "[-_]gcc[-_.]" | head -1)
-			if [[ -n "$gcc_url" ]]; then
-				download_url="$gcc_url"
-				print_yellow "Preferring gcc build: $download_url"
 			fi
 		fi
 
