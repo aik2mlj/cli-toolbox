@@ -1,6 +1,6 @@
 # Lejun's Command-Line Toolbox
 
-A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on Linux, macOS, or WSL on Windows — whether you're on a **remote server without root access** or setting up a **local development environment**.
+A curated collection of modern command-line tools and shell configurations for productive terminal-based development. Works on Linux, macOS, or WSL on Windows — whether you're setting up a **local development environment** or a **remote server without root access**.
 
 The toolbox includes a set of tools I find essential for daily development (see [CLI Tools Included](#cli-tools-included) below), along with their configurations. For local (Linux) desktop setup recommendations, see my [dotfile repo](https://github.com/aik2mlj/chezmoi).
 
@@ -13,6 +13,25 @@ The [install.sh](./install.sh) script handles everything. It backs up any existi
 ```shell
 git clone https://github.com/aik2mlj/cli-toolbox.git && cd cli-toolbox
 ```
+
+### System-wide Installation
+
+If you are on a machine with sudo access, and your distro packages are reasonably up-to-date (Arch Linux, Fedora, macOS), use your package manager (`dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
+
+```shell
+# for macOS with Homebrew
+brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo font-symbols-only-nerd-font
+brew link ffmpeg-full imagemagick-full -f --overwrite
+
+# for Arch Linux
+paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin neovim ripgrep starship yazi zoxide ffmpeg jq poppler resvg imagemagick mediainfo
+
+# apply the configs
+./install.sh --config-only                        # install essential configs only
+./install.sh --config-only --overwrite            # install essential configs, overwrite existing
+```
+
+Do remember to upgrade the binaries from time to time with your package manager.
 
 ### User-scoped (Rootless) Installation
 
@@ -36,25 +55,6 @@ You may additionally install `ffmpeg` (from [this repo](https://github.com/BtbN/
 ```shell
 ./install.sh --ffmpeg
 ```
-
-### System-wide Installation
-
-If you are on a machine with sudo access, and your distro packages are reasonably up-to-date (Arch Linux, Fedora, macOS), use your package manager (`dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
-
-```shell
-# for macOS with Homebrew
-brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo font-symbols-only-nerd-font
-brew link ffmpeg-full imagemagick-full -f --overwrite
-
-# for Arch Linux
-paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin neovim ripgrep starship yazi zoxide ffmpeg jq poppler resvg imagemagick mediainfo
-
-# apply the configs
-./install.sh --config-only                        # install essential configs only
-./install.sh --config-only --overwrite            # install essential configs, overwrite existing
-```
-
-Do remember to upgrade the binaries from time to time with your package manager.
 
 ### Customized Installation
 
@@ -115,7 +115,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
-Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [User-scoped Installation](#user-scoped-rootless-installation) due to its large binary size; `poppler` requires a system package manager.
+Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [User-scoped Installation](#user-scoped-rootless-installation)) due to its large binary size; `poppler` requires a system package manager.
 
 ## Configuration Details
 
