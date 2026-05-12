@@ -31,6 +31,12 @@ To just install the binaries or to upgrade (reinstall) them:
 ./install.sh --upgrade
 ```
 
+You may additionally install `ffmpeg` (from [this repo](https://github.com/BtbN/FFmpeg-Builds)’s nightly binary) using this script, if you don't have it already. `ffmpeg` is a powerful tool for audio and video processing. It can be included for video thumbnail preview in `yazi`.
+
+```shell
+./install.sh --ffmpeg
+```
+
 ### System-wide Installation
 
 If you are on a machine with sudo access, and your distro packages are reasonably up-to-date (Arch Linux, Fedora, macOS), use your package manager (`dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
@@ -109,7 +115,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
-Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [Optional](#optional)) due to its large binary size; `poppler` requires a system package manager.
+Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [User-scoped Installation](#user-scoped-rootless-installation) due to its large binary size; `poppler` requires a system package manager.
 
 ## Configuration Details
 
@@ -151,12 +157,6 @@ Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `media
 
   ```shell
   ./install.sh --nvim-config
-  ```
-
-- `ffmpeg` for full `yazi` video thumbnail and media preview support. Install with:
-
-  ```shell
-  ./install.sh --ffmpeg
   ```
 
 - If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
