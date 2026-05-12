@@ -37,7 +37,7 @@ If you are on a machine with sudo access, and your distro packages are reasonabl
 
 ```shell
 # for macOS with Homebrew
-brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo
+brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo font-symbols-only-nerd-font
 brew link ffmpeg-full imagemagick-full -f --overwrite
 
 # for Arch Linux
