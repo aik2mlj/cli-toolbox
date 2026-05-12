@@ -36,10 +36,12 @@ To just install the binaries or to upgrade (reinstall) them:
 If you are on a machine with sudo access, and your distro packages are reasonably up-to-date (Arch Linux, Fedora, macOS), use your package manager (`dnf`, `pacman`, `brew`, etc.) for the binaries, and only apply the configs:
 
 ```shell
-# one-liner for macOS
-brew install fish bat btop difftastic dust eza fd 7-zip fzf lazygit mcat mediainfo neovim ripgrep starship yazi zoxide
-# one-liner for Arch Linux
-paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin mediainfo neovim ripgrep starship yazi zoxide
+# for macOS with Homebrew
+brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo
+brew link ffmpeg-full imagemagick-full -f --overwrite
+
+# for Arch Linux
+paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin neovim ripgrep starship yazi zoxide ffmpeg jq poppler resvg imagemagick mediainfo
 
 # apply the configs
 ./install.sh --config-only                        # install essential configs only
@@ -88,18 +90,19 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [dust](https://github.com/bootandy/dust) - A more intuitive version of `du` in rust, handy to inspect disk usage.
 - [eza](https://github.com/eza-community/eza) - A modern alternative to `ls` with colors and icons.
 - [fd](https://github.com/sharkdp/fd) - A simple, fast and user-friendly alternative to `find`.
-- [7z](https://www.7-zip.org/) - A file archiver with a high compression ratio.
+- [7-zip](https://www.7-zip.org/) - A file archiver with a high compression ratio.
 - [fzf](https://github.com/junegunn/fzf) - A blazingly fast command-line fuzzy finder.
 - [lazygit](https://github.com/jesseduffield/lazygit) - An intuitive terminal UI for `git`.
   - With usually just a few keystrokes to perform pull, fetch, push, or commit, I found it much easier to use than git commands and all the GUI git tools. It also includes advanced git cherry-picking, rebasing, and stash management features at hand.
 - [mcat](https://github.com/Skardyy/mcat) - A versatile viewer that renders many file types (markdown, image/video, pdf, docx, pptx, xlsx, html, etc.) directly in terminal. Very useful for `yazi` preview.
-- [mediainfo](https://mediaarea.net/en/MediaInfo) - Displays technical and tag information about media files. Useful for `yazi` preview.
 - [neovim](https://neovim.io/) - A hyperextensible Vim-based text editor. My choice of text editor.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - A modern (and much faster) alternative to `grep`. Recursively searches directories for a regex pattern.
 - [starship](https://starship.rs/) - A minimal, blazing-fast, and infinitely customizable prompt for any shell.
 - [yazi](https://yazi-rs.github.io/) - A blazing fast terminal file manager written in Rust.
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
+
+Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function.
 
 ## Configuration Details
 
