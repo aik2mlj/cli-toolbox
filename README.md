@@ -64,10 +64,15 @@ Run `gah --help` to check the usage. Consult the [gah](https://github.com/get-ga
 
 And of course, you can manually copy individual config files in this repo to their respective location in your home directory.
 
-### Post Installation
+### Terminal Emulator
 
-- Use a modern terminal emulator that renders images and [Nerd Font](https://www.nerdfonts.com/) well. I recommend [Ghostty](https://ghostty.org/) which just works out-of-the-box, or [Kitty](https://sw.kovidgoyal.net/kitty/) if you need more features and extensive configurability.
-  - You may find it very helpful knowing your emulator's tab / window management and various keybindings. For Ghostty, take a look at this [cheat sheet](https://ricoberger.de/cheat-sheets/ghostty/).
+Use a modern terminal emulator that renders images and [Nerd Font](https://www.nerdfonts.com/) well. I recommend [Ghostty](https://ghostty.org/) which just works out-of-the-box, or [Kitty](https://sw.kovidgoyal.net/kitty/) if you need more features and extensive configurability (what I use).
+
+- You may find it very helpful knowing your emulator's tab / window management and various keybindings. For Ghostty, take a look at this [cheat sheet](https://ricoberger.de/cheat-sheets/ghostty/).
+
+Now, simply open the emulator and enjoy your beautified and supercharged terminal!
+
+### Post Installation
 
 - You may want to set the default shell to `fish`.
   - If this is a local setup, change the login shell with `chsh -s $(which fish)`. If this fails, add `fish` to `/etc/shells` first with `sudo sh -c 'echo $(which fish) >> /etc/shells'`.
@@ -76,6 +81,8 @@ And of course, you can manually copy individual config files in this repo to the
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
 - If you want to install additional binaries to `~/.local/bin/`, see [Customized Installation](#customized-installation)
+
+- Check out [Optional](#optional) for additional tools and configs that may interests you.
 
 ## CLI Tools Included
 
@@ -153,6 +160,8 @@ Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `media
   ```
 
 - If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
+
+- You can find cool fonts that support command-line icons at [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Pick one you like, download and install it, and set it as the font in your terminal emulator. This might be needed if you notice some icons are missing (displayed as empty squares).
 
 - [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust. Highly recommended over `conda` or `venv` for managing Python environments in most cases — a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more, and 10–100x faster than `pip`. Install with `gah install astral-sh/uv` or your package manager.
 
