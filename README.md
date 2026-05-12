@@ -102,7 +102,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
-Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function.
+Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [Optional](#optional)) due to its large binary size; `poppler` requires a system package manager.
 
 ## Configuration Details
 
@@ -141,7 +141,13 @@ Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `media
 - Neovim configuration: If you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. This repo contains a minimum Lazyvim config tweaked to my liking. You can copy the Neovim config in this repo by
 
   ```shell
-  ./install.sh --nvim
+  ./install.sh --nvim-config
+  ```
+
+- `ffmpeg` for full `yazi` video thumbnail and media preview support. Install with:
+
+  ```shell
+  ./install.sh --ffmpeg
   ```
 
 - If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.

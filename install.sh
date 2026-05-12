@@ -178,9 +178,8 @@ install_bin_tools() {
     install_mediainfo             # custom URL — MediaArea has no GitHub release binaries
     run_gah ip7z/7zip             # installs 7zz and 7zzs
 
-    # yazi optional dependencies (preview thumbnails, PDF, SVG, image conversion)
+    # yazi optional dependencies (preview thumbnails, SVG, image conversion)
     run_gah linebender/resvg
-    run_gah BtbN/FFmpeg-Builds # installs ffmpeg, ffprobe, ffplay (static GPL build)
     run_gah ImageMagick/ImageMagick
     # imagemagick AppImage is installed as 'imagemagick'; rename to the canonical command
     for f in "$LOCAL_BIN_DIR"/imagemagick*; do
@@ -273,6 +272,7 @@ main() {
     local config_only=false
     local gah_only=false
     local nvim_only=false
+    local ffmpeg_only=false
     for arg in "$@"; do
         case "$arg" in
         --overwrite) OVERWRITE=true ;;
@@ -280,7 +280,8 @@ main() {
         --upgrade | --binary-only) binary_only=true ;;
         --config-only) config_only=true ;;
         --gah) gah_only=true ;;
-        --nvim) nvim_only=true ;;
+        --nvim-config) nvim_only=true ;;
+        --ffmpeg) ffmpeg_only=true ;;
         esac
     done
 
@@ -294,6 +295,13 @@ main() {
     if [ "$nvim_only" = true ]; then
         install_nvim_config
         echo "✅ Neovim config installed."
+        return
+    fi
+
+    if [ "$ffmpeg_only" = true ]; then
+        run_gah BtbN/FFmpeg-Builds
+        ensure_local_bin_in_path
+        echo "✅ ffmpeg installed."
         return
     fi
 
