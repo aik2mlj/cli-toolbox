@@ -115,7 +115,9 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - A must have for terminal browsing. Stop `cd`ing around and using `ls` to browse files. It has built-in fuzzy search, code highlighting, decompression, and image previews. Please see the [quick start docs](https://yazi-rs.github.io/docs/quick-start/) and this [cheat sheet](https://ricoberger.de/cheat-sheets/yazi/).
 - [zoxide](https://github.com/ajeetdsouza/zoxide) - A smarter `cd` command that remembers your most used directories and allows you to jump to them quickly.
 
-Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `mediainfo`) are needed as dependencies for complete `yazi` preview function. `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [User-scoped Installation](#user-scoped-rootless-installation)) due to its large binary size; `poppler` requires a system package manager.
+Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.freedesktop.org/), [ffmpeg](https://www.ffmpeg.org/), [resvg](https://github.com/linebender/resvg), [ImageMagick](https://imagemagick.org/), [mediainfo](https://mediaarea.net/en/MediaInfo)) are needed as dependencies for complete `yazi` preview function. See [yazi doc](https://yazi-rs.github.io/docs/installation/) for the reasons they are needed.
+
+- If you are using the rootless installation, `jq`, `resvg`, `imagemagick` (`magick`), and `mediainfo` are installed automatically. `ffmpeg` is available separately (see [User-scoped Installation](#user-scoped-rootless-installation)) due to its large binary size; `poppler` unfortunately cannot be easily installed as a static binary, you may install it rootlessly from `conda-forge`.
 
 ## Configuration Details
 
