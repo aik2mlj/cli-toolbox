@@ -17,6 +17,7 @@ ESSENTIAL_CONFIGS=(
     # ".config/starship.toml"
     ".config/yazi"
     ".config/lazygit"
+    ".config/ghostty"
     ".ssh/rc"
 )
 

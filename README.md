@@ -71,7 +71,7 @@ And of course, you can manually copy individual config files in this repo to the
 
 - You may want to set the default shell to `fish`.
   - If this is a local setup, change the login shell with `chsh -s $(which fish)`. If this fails, add `fish` to `/etc/shells` first with `sudo sh -c 'echo $(which fish) >> /etc/shells'`.
-    - You may also just need to set `fish` as a command to run at launch in your terminal emulator's settings without changing the login shell.
+    - You may also just need to set `fish` as a command to run at launch in your terminal emulator's settings without changing the login shell. For Ghostty users, this is already covered in this config.
   - If this is a remote server without a system-wide `fish` installed, you may want to check [this setup guide](https://wiki.archlinux.org/title/Fish#Setting_fish_as_interactive_shell_only).
     - If you always launch `tmux`, you are already covered — the default shell in `tmux` has been set to `fish`.
 
@@ -127,6 +127,8 @@ Some additional tools (`jq`, `poppler`, `ffmpeg`, `resvg`, `imagemagick`, `media
   - [mediainfo.yazi](https://github.com/boydaihungst/mediainfo.yazi) to show thumbnail using `ffmpeg` and media metadata using `mediainfo` (toggle showing metadata: `<f9>`).
 
 - `lazygit` - The configuration file is located at [`~/.config/lazygit/config.yml`](home/.config/lazygit/config.yml). The default diff tool is set to `difftastic`, which provides a more intuitive diff output.
+
+- `ghostty` - Default shell is set to `fish` in [`~/.config/ghostty/config.ghostty`](home/.config/ghostty/config.ghostty).
 
 - `tmux` - I usually rely on my terminal emulator's tab / window management for multi-tasking on a local machine. But when working on remote servers, `tmux` is essential to keep sessions alive when you disconnect. This configuration uses [oh my tmux](https://github.com/gpakosz/.tmux). It includes a status bar with system information, battery status, and more. Some things to note:
   - Please see the [original repository](https://github.com/gpakosz/.tmux) for keybindings and smart usages.
