@@ -217,6 +217,9 @@ install_configs() {
         dest="$HOME_DIR/$path"
         if [ -e "$src" ]; then
             backup_file "$dest"
+            if [ "$OVERWRITE" = true ] && [ -d "$dest" ]; then
+                rm -rf "$dest"
+            fi
             mkdir -p "$(dirname "$dest")"
             cp -r "$src" "$dest"
             echo "Installed $path"
