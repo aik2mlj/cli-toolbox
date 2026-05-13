@@ -649,7 +649,7 @@ function command_install() {
 	fi
 
 	print_debug "Finding executable files to install"
-	for bin_file in $(find . -type f -executable); do
+	for bin_file in $(find . -type f -perm +111); do
 		print_debug "Found executable: $bin_file"
 
 		print_debug "Getting base file name"
