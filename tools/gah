@@ -379,6 +379,9 @@ function find_download_url() {
 
 	# AppImage fallback: when no OS-tagged asset matched, accept AppImages that have the
 	# correct arch in their name (AppImages are Linux-only, so no OS tag is needed).
+	if [[ $(get_os) != "linux" ]]; then
+		return
+	fi
 	local appimage_regexp=$(get_appimage_name_regexp)
 	for name in $(jq -r '.assets[].name' "$release_json"); do
 		local lower_name=$(echo "$name" | tr '[A-Z]' '[a-z]')
