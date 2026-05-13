@@ -95,7 +95,8 @@ ensure_jq() {
 # Usage: run_gah <alias_or_owner/repo>
 run_gah() {
     local gah="$DOTFILES_DIR/tools/gah"
-    GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@"
+    GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@" \
+        || echo "Warning: failed to install $*, skipping." >&2
 }
 
 # MediaInfo: AppImage for maximum glibc compatibility (bundles glibc 2.3).
