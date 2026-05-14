@@ -82,10 +82,20 @@ ensure_jq() {
         exit 1
         ;;
     esac
+    local os
+    os=$(uname -s | tr '[:upper:]' '[:lower:]')
+    case "$os" in
+    linux) os="linux" ;;
+    darwin) os="macos" ;;
+    *)
+        echo "Error: unsupported OS for jq bootstrap: $os" >&2
+        exit 1
+        ;;
+    esac
+
     mkdir -p "$LOCAL_BIN_DIR"
-    http_download \
-        "https://github.com/jqlang/jq/releases/latest/download/jq-linux-${arch}" \
-        "$LOCAL_BIN_DIR/jq"
+    url="https://github.com/jqlang/jq/releases/latest/download/jq-${os}-${arch}"
+    http_download "$url" "$LOCAL_BIN_DIR/jq"
     chmod +x "$LOCAL_BIN_DIR/jq"
     export PATH="$LOCAL_BIN_DIR:$PATH"
     echo "jq installed to $LOCAL_BIN_DIR/jq"
@@ -95,8 +105,8 @@ ensure_jq() {
 # Usage: run_gah <alias_or_owner/repo>
 run_gah() {
     local gah="$DOTFILES_DIR/tools/gah"
-    GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@" \
-        || echo "Warning: failed to install $*, skipping." >&2
+    GAH_INSTALL_DIR="$LOCAL_BIN_DIR" GAH_UNATTENDED=true bash "$gah" install "$@" ||
+        echo "Warning: failed to install $*, skipping." >&2
 }
 
 # MediaInfo: AppImage for maximum glibc compatibility (bundles glibc 2.3).
