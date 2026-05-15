@@ -154,8 +154,8 @@ ensure_local_bin_in_path() {
         ;;
     esac
 
-    if [[ ":$PATH:" == *":$LOCAL_BIN_DIR:"* ]]; then
-        echo "$LOCAL_BIN_DIR already on PATH"
+    if grep -qF '.local/bin' "$config" 2>/dev/null; then
+        echo "$LOCAL_BIN_DIR already mentioned in $config"
         return
     fi
 
