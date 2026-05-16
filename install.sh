@@ -109,18 +109,23 @@ run_gah() {
         echo "Warning: failed to install $*, skipping." >&2
 }
 
-# MediaInfo: AppImage for maximum glibc compatibility (bundles glibc 2.3).
+# MediaInfo: extract CLI binary from Ubuntu .deb (no AppImage since 20.09; .deb works on any x86_64 Linux).
 # MediaArea does not publish Linux binaries on GitHub releases; custom URL required.
-# Only x86_64 AppImages are published; arm64 is not available upstream.
+# Only x86_64 .deb packages are published; arm64 is not available upstream.
 install_mediainfo() {
     if [[ $(uname -m) != "x86_64" ]]; then
-        echo "Warning: mediainfo AppImage is x86_64-only, skipping." >&2
+        echo "Warning: mediainfo is x86_64-only, skipping." >&2
         return
     fi
-    local url="https://mediaarea.net/download/binary/mediainfo/20.09/mediainfo-20.09.glibc2.3-x86_64.AppImage"
-    http_download "$url" "$LOCAL_BIN_DIR/mediainfo"
-    chmod +x "$LOCAL_BIN_DIR/mediainfo"
-    echo "Installed: mediainfo (AppImage)"
+    local version="26.05"
+    local deb="mediainfo_${version}-1_amd64.xUbuntu_22.04.deb"
+    local url="https://mediaarea.net/download/binary/mediainfo/$version/$deb"
+    local tmpdir="$(mktemp -d)"
+    http_download "$url" "$tmpdir/$deb"
+    (cd "$tmpdir" && ar x "$deb" data.tar.zst && tar --zstd -xf data.tar.zst)
+    mv "$tmpdir/usr/bin/mediainfo" "$LOCAL_BIN_DIR/mediainfo"
+    rm -rf "$tmpdir"
+    echo "Installed: mediainfo"
 }
 
 install_gah() {
