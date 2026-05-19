@@ -286,6 +286,27 @@ install_all_configs() {
     upgrade_yazi_plugins
 }
 
+# Patch ghostty config to use the full path to fish instead of bare "fish",
+# since Ghostty may not have ~/.local/bin on PATH at startup time.
+patch_ghostty_fish_command() {
+    local ghostty_config="$HOME_DIR/.config/ghostty/config.ghostty"
+    [ -f "$ghostty_config" ] || return
+
+    local fish_path=""
+    if [ -x "$LOCAL_BIN_DIR/fish" ]; then
+        fish_path="$LOCAL_BIN_DIR/fish"
+    elif command -v fish >/dev/null 2>&1; then
+        fish_path="$(command -v fish)"
+    else
+        echo "Warning: fish not found, leaving ghostty command unchanged." >&2
+        return
+    fi
+
+    sed "s|^command = fish |command = $fish_path |" "$ghostty_config" >"$ghostty_config.tmp" &&
+        mv "$ghostty_config.tmp" "$ghostty_config"
+    echo "Patched ghostty command to: $fish_path"
+}
+
 main() {
     local install_all=false
     local binary_only=false
@@ -343,6 +364,7 @@ main() {
     fi
 
     ensure_local_bin_in_path
+    patch_ghostty_fish_command
     echo "✅ Installation complete."
 }
 
