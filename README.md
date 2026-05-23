@@ -155,6 +155,10 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
 
 ## Optional
 
+- If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
+
+- You can find cool fonts that support command-line icons at [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Pick one you like, download and install it, and set it as the font in your terminal emulator. This might be needed if you notice some icons are missing (displayed as empty squares).
+
 - [Neovim](https://neovim.io/): If you want to go hard-core using Neovim as your main editor in the terminal, I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. This repo contains a minimum Lazyvim config tweaked to my liking. You can copy the Neovim config in this repo by
 
   ```shell
@@ -163,10 +167,6 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
   ```
 
   And you may want to change `EDITOR` to `nvim` in `~/.config/fish/config.fish` or wherever you set the editor.
-
-- If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
-
-- You can find cool fonts that support command-line icons at [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Pick one you like, download and install it, and set it as the font in your terminal emulator. This might be needed if you notice some icons are missing (displayed as empty squares).
 
 - [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust. Highly recommended over `conda` or `venv` for managing Python environments in most cases — a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more, and 10–100x faster than `pip`. Install with `gah install astral-sh/uv` or your package manager.
 
