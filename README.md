@@ -134,7 +134,7 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
 
 - `yazi` - The configuration files are located at [`~/.config/yazi/`](home/.config/yazi/). I basically installed some plugins to enhance the functionality and the look.
   - `shift + j/k` to navigate 5 times faster in the file list. `opt/alt + j/k` to seek 5 units up/down in the preview (e.g., see the next page of the previewed text file, or see the next frame of the previewed video).
-  - [smart-enter.yazi](https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi) to open files or enter directories in one key (since I like vim keybindings, `l`).
+  - [smart-enter.yazi](https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi) to open files or enter directories in one key (`l` or right-arrow).
   - [piper.yazi](https://github.com/yazi-rs/plugins/tree/main/piper.yazi) to pipe any shell command as a previewer.
   - [full-border.yazi](https://github.com/yazi-rs/plugins/tree/main/full-border.yazi) to make it look fancier.
   - [git.yazi](https://github.com/yazi-rs/plugins/tree/main/git.yazi) to show the status of git file changes in the file list.
