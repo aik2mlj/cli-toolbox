@@ -122,7 +122,7 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
 ## Configuration Details
 
 - `fish` - I use `fish` as my shell. The configuration includes some useful functions, abbreviations and aliases. Please see the main configuration file at [`~/.config/fish/config.fish`](home/.config/fish/config.fish) for details. Some things to note:
-  - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory.
+  - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory. No more laborious `cd`ing!
   - The default prompt is set to use `starship`, which provides a nice and informative prompt.
   - The default editor is set to `fresh`.
   - `ctrl + o` to open the file manager `yazi` and will change the current working directory when exiting (the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper) is configured in [`functions/yazi-cd.fish`](home/.config/fish/functions/yazi-cd.fish)).
