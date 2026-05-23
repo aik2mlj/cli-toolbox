@@ -9,12 +9,8 @@ set -gx PATH $GEM_HOME $PATH
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx PATH $BUN_INSTALL/bin $PATH
 
-# set the default pager to neovim
-set -gx MANPAGER "nvim +Man!"
-
-# set the default editor to neovim
-set -gx EDITOR nvim
-set -gx VISUAL nvim
+# set the default editor to fresh
+set -gx EDITOR fresh
 
 # ctrl-f to search for files using fzf.fish
 # ctrl-r to search for command history using fzf.fish
@@ -46,11 +42,10 @@ alias rm="/bin/rm -v > ~/.rm.log"
 # let's use fish abbreviation cuz it's more transparent in command history
 
 # for sudo editing files
-abbr svim sudo -E nvim
+abbr se sudo -E fresh
 # systemctl commands
 abbr sys sudo systemctl
-# vim will becomes neovim, comment out the next line if you want to use vim instead of nvim
-abbr vim nvim
+
 # human readable df
 abbr df df -h
 # top will become btop, comment out the next line if you want to use top instead of btop

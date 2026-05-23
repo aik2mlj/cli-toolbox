@@ -191,7 +191,7 @@ install_bin_tools() {
     run_gah BurntSushi/ripgrep # installs rg
     run_gah starship/starship
     run_gah fish-shell/fish-shell # installs fish
-    run_gah neovim/neovim         # gah picks AppImage (index 1) over tarball — both match but AppImage is preferred
+    run_gah sinelaw/fresh
     install_mediainfo             # custom URL — MediaArea has no GitHub release binaries
     run_gah ip7z/7zip             # installs 7zz and 7zzs
 
@@ -314,6 +314,7 @@ main() {
     local gah_only=false
     local nvim_only=false
     local ffmpeg_only=false
+    local nvim_bin_only=false
     for arg in "$@"; do
         case "$arg" in
         --overwrite) OVERWRITE=true ;;
@@ -322,6 +323,7 @@ main() {
         --config-only) config_only=true ;;
         --gah) gah_only=true ;;
         --nvim-config) nvim_only=true ;;
+        --nvim) nvim_bin_only=true ;;
         --ffmpeg) ffmpeg_only=true ;;
         esac
     done
@@ -336,6 +338,13 @@ main() {
     if [ "$nvim_only" = true ]; then
         install_nvim_config
         echo "✅ Neovim config installed."
+        return
+    fi
+
+    if [ "$nvim_bin_only" = true ]; then
+        run_gah neovim/neovim
+        ensure_local_bin_in_path
+        echo "✅ neovim installed."
         return
     fi
 

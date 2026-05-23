@@ -20,11 +20,11 @@ If you are on a machine with sudo access, and your distro packages are reasonabl
 
 ```shell
 # for macOS with Homebrew
-brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat neovim ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo font-symbols-only-nerd-font
+brew install fish bat btop difftastic dust eza fd sevenzip fzf lazygit mcat fresh-editor ripgrep starship yazi zoxide ffmpeg-full jq poppler resvg imagemagick-full mediainfo font-symbols-only-nerd-font
 brew link ffmpeg-full imagemagick-full -f --overwrite
 
 # for Arch Linux
-paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin neovim ripgrep starship yazi zoxide ffmpeg jq poppler resvg imagemagick mediainfo
+paru -S --needed fish bat btop difftastic dust eza fd 7zip fzf lazygit mcat-bin fresh-editor-bin ripgrep starship yazi zoxide ffmpeg jq poppler resvg imagemagick mediainfo
 
 # apply the configs
 ./install.sh --config-only                        # install essential configs only
@@ -108,7 +108,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
 - [lazygit](https://github.com/jesseduffield/lazygit) - An intuitive terminal UI for `git`.
   - With usually just a few keystrokes to perform pull, fetch, push, or commit, I found it much easier to use than git commands and all the GUI git tools. It also includes advanced git cherry-picking, rebasing, and stash management features at hand.
 - [mcat](https://github.com/Skardyy/mcat) - A versatile viewer that renders many file types (markdown, image/video, pdf, docx, pptx, xlsx, html, etc.) directly in terminal. Very useful for `yazi` preview.
-- [neovim](https://neovim.io/) - A hyperextensible Vim-based text editor. My choice of text editor.
+- [fresh](https://getfresh.dev/) - A modern terminal text editor and IDE with zero learning curve. A VSCode-like experience in the terminal.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - A modern (and much faster) alternative to `grep`. Recursively searches directories for a regex pattern.
 - [starship](https://starship.rs/) - A minimal, blazing-fast, and infinitely customizable prompt for any shell.
 - [yazi](https://yazi-rs.github.io/) - A blazing fast terminal file manager written in Rust.
@@ -124,7 +124,7 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
 - `fish` - I use `fish` as my shell. The configuration includes some useful functions, abbreviations and aliases. Please see the main configuration file at [`~/.config/fish/config.fish`](home/.config/fish/config.fish) for details. Some things to note:
   - `z` is an alias for `zoxide`. Try simply `z <partial name of a directory you've been to>` to jump to that directory.
   - The default prompt is set to use `starship`, which provides a nice and informative prompt.
-  - The default editor is set to `neovim`. `vim` will become `nvim`. You can comment out the line if you don't want this behavior.
+  - The default editor is set to `fresh`.
   - `ctrl + o` to open the file manager `yazi` and will change the current working directory when exiting (the [wrapper](https://yazi-rs.github.io/docs/quick-start#shell-wrapper) is configured in [`functions/yazi-cd.fish`](home/.config/fish/functions/yazi-cd.fish)).
   - Fuzzy-finder keybindings come from [fzf.fish](https://github.com/PatrickF1/fzf.fish).
     - `ctrl + r` to search through your command history.
@@ -155,19 +155,20 @@ Some additional tools ([jq](https://jqlang.org/), [poppler](https://poppler.free
 
 ## Optional
 
-- Neovim configuration: If you want to go hard-core using Neovim as your main editor in the terminal. I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. This repo contains a minimum Lazyvim config tweaked to my liking. You can copy the Neovim config in this repo by
+- [Neovim](https://neovim.io/): If you want to go hard-core using Neovim as your main editor in the terminal, I recommend [LazyVim](https://www.lazyvim.org/) as a base setup. It saves a tone of time providing a full-fledged IDE experience out of the box. But still be prepared to spend a fare amount of time to go through all the tools and configure your own version. This repo contains a minimum Lazyvim config tweaked to my liking. You can copy the Neovim config in this repo by
 
   ```shell
-  ./install.sh --nvim-config
+  ./install.sh --nvim               # install neovim binary (for rootless)
+  ./install.sh --nvim-config        # apply neovim config
   ```
+
+  And you may want to change `EDITOR` to `nvim` in `~/.config/fish/config.fish` or wherever you set the editor.
 
 - If you are Lejun or you want to use every config in this repo, append `--all` flag to `./install.sh`. Do take a look at all the configs in the repo before applying everything.
 
 - You can find cool fonts that support command-line icons at [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Pick one you like, download and install it, and set it as the font in your terminal emulator. This might be needed if you notice some icons are missing (displayed as empty squares).
 
 - [uv](https://docs.astral.sh/uv/): An extremely fast Python package and project manager, written in Rust. Highly recommended over `conda` or `venv` for managing Python environments in most cases — a single tool that replaces `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, `twine`, `virtualenv`, and more, and 10–100x faster than `pip`. Install with `gah install astral-sh/uv` or your package manager.
-
-- [fresh](https://getfresh.dev/): A powerful terminal text editor and IDE with zero learning curve. Give it a try if you want a VSCode-like experience in the terminal.
 
 - [Zellij](https://zellij.dev/): Tired of remembering all the `tmux` shortcuts? `zellij` is a modern Rust alternative to `tmux` with a more intuitive UI, keybindings, and many great features.
 
