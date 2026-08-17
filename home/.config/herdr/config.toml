@@ -1,0 +1,19 @@
+onboarding = false
+
+[theme]
+name = "kanagawa"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+a"
+
+[terminal]
+default_shell = "fish"
+
+[experimental]
+kitty_graphics = true
+pane_history = true
+
+[ui]
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "priority"
