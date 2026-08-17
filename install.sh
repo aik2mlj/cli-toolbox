@@ -192,6 +192,7 @@ install_bin_tools() {
     run_gah starship/starship
     run_gah fish-shell/fish-shell # installs fish
     run_gah sinelaw/fresh
+    run_gah herdrdev/herdr
     install_mediainfo             # custom URL — MediaArea has no GitHub release binaries
     run_gah ip7z/7zip             # installs 7zz and 7zzs
 

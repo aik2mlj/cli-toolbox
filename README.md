@@ -109,6 +109,7 @@ Here is a brief overview. I recommend browsing the quick start guide of each too
   - With usually just a few keystrokes to perform pull, fetch, push, or commit, I found it much easier to use than git commands and all the GUI git tools. It also includes advanced git cherry-picking, rebasing, and stash management features at hand.
 - [mcat](https://github.com/Skardyy/mcat) - A versatile viewer that renders many file types (markdown, image/video, pdf, docx, pptx, xlsx, html, etc.) directly in terminal. Very useful for `yazi` preview.
 - [fresh](https://getfresh.dev/) - A modern terminal text editor and IDE with zero learning curve. A VSCode-like experience in the terminal.
+- [herdr](https://herdr.dev/) - A terminal multiplexer for running and monitoring multiple coding agents in persistent workspaces.
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - A modern (and much faster) alternative to `grep`. Recursively searches directories for a regex pattern.
 - [starship](https://starship.rs/) - A minimal, blazing-fast, and infinitely customizable prompt for any shell.
 - [yazi](https://yazi-rs.github.io/) - A blazing fast terminal file manager written in Rust.
